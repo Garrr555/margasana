@@ -46,7 +46,7 @@ export default function LoginView() {
         <h2 className="text-center text-white text-2xl font-semibold mb-4">
           Login
         </h2>
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>}
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div>
             <label className="block text-white/80">Email</label>
