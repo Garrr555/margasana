@@ -1,9 +1,12 @@
 "use client";
 
+import Google from "next-auth/providers/google";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import GoogleBtn from "../../../layouts/googlebtn";
+import { FaGoogle } from "react-icons/fa";
 
 export default function LoginView() {
   const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +77,10 @@ export default function LoginView() {
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+        <br />
+        <hr />
+        <br />
+        <GoogleBtn onClick={() => signIn("google", { callbackUrl, redirect: false })}/>
 
         <p className="mt-4 text-center text-white/80">
           Don't have an account?{" "}
