@@ -1,4 +1,4 @@
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 export default function GoogleBtn({ onClick }) {
   return (
@@ -8,8 +8,8 @@ export default function GoogleBtn({ onClick }) {
         className="w-full bg-accent text-primary py-2 rounded-xl hover:bg-accent-hover flex justify-center items-center"
         onClick={onClick}
       >
-        <span className="font-bold">
-          <FaGoogle />
+        <span className="font-bold text-2xl">
+          <FcGoogle />
         </span>
         oogle
       </button>

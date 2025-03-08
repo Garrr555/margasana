@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import GoogleBtn from "../../../layouts/googlebtn";
-import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 export default function LoginView() {
   const [isLoading, setIsLoading] = useState(false);
