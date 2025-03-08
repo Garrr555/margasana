@@ -24,6 +24,9 @@ export default function RegisterView() {
       phone: event.target.phone.value,
     };
 
+    //versi menggunakan axios
+    // const result = await authServices.registerAccount(data);
+    
     const result = await fetch("/api/user/register", {
       method: "POST",
       headers: {

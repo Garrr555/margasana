@@ -1,6 +1,6 @@
 // app/api/user/register/route.js
 
-import { signUp } from "../../../../services/auth";
+import { signUp } from "../../../../services/auth/services";
 
 // Fungsi untuk menangani POST request
 export async function POST(req) {
