@@ -7,7 +7,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import GoogleBtn from "../../../layouts/googlebtn";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { IoMdLogIn } from "react-icons/io";
 
 export default function LoginView() {
   const [isLoading, setIsLoading] = useState(false);
@@ -46,30 +48,36 @@ export default function LoginView() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-primary">
       <div className="w-full max-w-md bg-secondary p-6 rounded-xl shadow-lg">
-        <h2 className="text-center text-white text-2xl font-semibold mb-4">
+        <h2 className="text-center text-accent text-3xl font-bold mb-4">
           Login
         </h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-          <div>
+          <div className="relative">
             <label className="block text-white/80">Email</label>
+            {/* <div className="absolute left-3 top-9 text-white/60 text-xl">
+              <MdEmail />
+            </div> */}
             <input
               name="email"
               id="email"
               type="email"
               className="w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-accent bg-primary rounded-xl"
-              placeholder="Enter your email"
+              placeholder={`exampel@gmail.com`}
             />
           </div>
 
           <div className="relative">
             <label className="block text-white/80">Password</label>
+            {/* <div className="absolute left-3 top-9 text-white/60 text-xl">
+              <RiLockPasswordFill />
+            </div> */}
             <input
               name="password"
               id="password"
               type={showPassword ? "text" : "password"}
               className="w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-accent bg-primary rounded-xl"
-              placeholder="Enter your password"
+              placeholder="***********"
             />
             <button
               type="button"
@@ -84,7 +92,16 @@ export default function LoginView() {
             type="submit"
             className="w-full bg-accent text-primary py-2 rounded-xl hover:bg-accent-hover"
           >
-            {isLoading ? "Loading..." : "Login"}
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <div className="flex items-center justify-center font-bold">
+                <span className="text-2xl">
+                  <IoMdLogIn />
+                </span>{" "}
+                Login
+              </div>
+            )}
           </button>
         </form>
         <br />
