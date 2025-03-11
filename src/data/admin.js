@@ -1,5 +1,7 @@
 import { MdDashboard } from "react-icons/md";
 import { FaBox } from "react-icons/fa6";
+import { FaUsers } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 
 export const listSideBar = [
   {
@@ -10,17 +12,17 @@ export const listSideBar = [
   {
     title: "Products",
     url: "/admin/products",
-    icon: FaBox ,
+    icon: FaBox,
   },
   {
     title: "Profile",
     url: "/admin/profile",
-    icon: FaBox ,
+    icon: CgProfile,
   },
   {
     title: "Users",
     url: "/admin/users",
-    icon: FaBox ,
+    icon: FaUsers,
   },
 ];
 

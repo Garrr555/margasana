@@ -8,7 +8,7 @@ import LoginOutView from "../../layouts/loginout";
 export default function Sidebar() {
   const pathname = usePathname();
   return (
-    <div className="w-64 h-screen bg-gray-900 border-r border-white/80 text-white/80 p-6 flex flex-col justify-between ">
+    <div className="w-64 h-screen bg-gray-900 border-r border-white/80 text-white/80 p-6 flex flex-col justify-between fixed top-0 left-0">
       <div>
         <h2 className="text-2xl mb-8">
           Admin Sidebar<span className="text-accent">.</span>

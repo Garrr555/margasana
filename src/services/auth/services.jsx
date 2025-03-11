@@ -1,4 +1,3 @@
-
 import { addData, retriveDataByField } from "../../lib/firebase/services";
 import bcrypt from "bcrypt";
 
@@ -34,12 +33,17 @@ export async function signIn(email) {
 }
 
 export async function loginWithGoogle(data, callback) {
+  const { email, password, role, fullname, phone, created_at, updated_at } =
+    data;
   const user = await retriveDataByField("users", "email", data.email);
 
   if (user.length > 0) {
     callback(user[0]);
   } else {
     data.role = "member";
+    data.created_at = new Date();
+    data.updated_at = new Date();
+    data.password = "";
     await addData("users", data, (result) => {
       if (result) {
         callback(data);
