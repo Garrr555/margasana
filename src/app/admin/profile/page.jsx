@@ -1,7 +1,9 @@
+import AdminProfileView from "../../../components/views/admin/profile";
+
 export default function AdminProfile() {
   return (
     <div>
-      <p>AdminProfile</p>
+      <AdminProfileView/>
     </div>
   );
 }

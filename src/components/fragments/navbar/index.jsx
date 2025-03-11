@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from "next/navigation";
-import LoginOutView from "../loginout";
+import LoginOutView from "../../layouts/loginout";
 import Link from "next/link";
 import links from "../../../data/links";
 

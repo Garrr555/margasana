@@ -1,5 +1,7 @@
+'use client'
 
 import Sidebar from "../../fragments/sidebar";
+import listSideBar from "../../../data/admin";
 
 export default function AdminLayout(props){
     const {children} = props

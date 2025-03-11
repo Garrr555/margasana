@@ -1,5 +1,5 @@
 import Link from "next/link";
-import NavbarView from "../layouts/navbar";
+import NavbarView from "../fragments/navbar";
 import LoginOutView from "../layouts/loginout";
 
 export default function Header() {

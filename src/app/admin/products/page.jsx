@@ -1,7 +1,9 @@
+import AdminProductView from "../../../components/views/admin/products";
+
 export default function AdminProduct() {
   return (
     <div>
-      <p>AdminProduct</p>
+      <AdminProductView/>
     </div>
   );
 }

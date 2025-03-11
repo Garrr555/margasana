@@ -1,7 +1,9 @@
+import AdminUserView from "../../../components/views/admin/users";
+
 export default function AdminUser() {
   return (
     <div>
-      <p>AdminUser</p>
+      <AdminUserView/>
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import AdminLayout from "../../components/layouts/AdminLayout";
+import AdminView from "../../components/views/admin/dashboard";
 
 export default function Admin(){
     return (
-      <AdminLayout>
-        <div>Admin Page</div>
-      </AdminLayout>
+      <div>
+        <AdminView />
+      </div>
     );
 }

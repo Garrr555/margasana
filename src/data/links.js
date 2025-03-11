@@ -26,8 +26,8 @@ const links = [
     logo: IoCodeWorking,
   },
   {
-    name: "contact",
-    path: "/contact",
+    name: "Admin",
+    path: "/admin",
     logo: IoMdContact,
   },
 ];
