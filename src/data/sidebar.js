@@ -1,9 +1,9 @@
 import { MdDashboard } from "react-icons/md";
-import { FaBox } from "react-icons/fa6";
+import { FaBox, FaCartShopping } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 
-export const listSideBar = [
+export const listSideBarAdmin = [
   {
     title: "Dashboard",
     url: "/admin",
@@ -23,6 +23,23 @@ export const listSideBar = [
     title: "Users",
     url: "/admin/users",
     icon: FaUsers,
+  },
+];
+export const listSideBarMember = [
+  {
+    title: "Dashboard",
+    url: "/member",
+    icon: MdDashboard,
+  },
+  {
+    title: "Orders",
+    url: "/member/orders",
+    icon: FaCartShopping ,
+  },
+  {
+    title: "Profile",
+    url: "/member/profile",
+    icon: CgProfile,
   },
 ];
 

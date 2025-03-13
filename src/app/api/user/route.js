@@ -3,6 +3,7 @@
 //   retriveData,
 //   updateData,
 // } from "../../../lib/firebase/services";
+// import jwt from "jsonwebtoken";
 
 // export default async function handler(req, res) {
 //   if (req.method === "GET") {
@@ -34,21 +35,35 @@
 //     });
 //   } else if (req.method === "DELETE") {
 //     const { id } = req.body;
-//     await deleteData("users", id, (result) => {
-//       if (result) {
-//         res.status(200).json({
-//           status: true,
-//           statusCode: 200,
-//           message: "Success",
+//     const token = req.headers.authorization?.split(" ")[1] || '';
+//     jwt.verify(token, process.env.NEXTAUTH_SECRET || '', async (err, decoded) => {
+//       if(decoded){
+//         await deleteData("users", id, (result) => {
+//           if (result) {
+//             res.status(200).json({
+//               status: true,
+//               statusCode: 200,
+//               message: "Success",
+//             });
+//           } else {
+//             res.status(400).json({
+//               status: false,
+//               statusCode: 400,
+//               message: "Failed",
+//             });
+//           }
 //         });
-//       } else {
-//         res.status(400).json({
+//       } else{
+//         res.status(403).json({
 //           status: false,
-//           statusCode: 400,
-//           message: "Failed",
-//         });
+//           statusCode: 403,
+//           message: "Gk usah ganti api bang, kasihan boomer yg megang nih web",
+//         })
 //       }
-//     });
+      
+//     })
+   
+    
 //   }
 // }
 
@@ -57,6 +72,7 @@ import {
   retriveData,
   updateData,
 } from "../../../lib/firebase/services";
+import jwt from "jsonwebtoken";
 
 export async function GET() {
   try {
@@ -166,3 +182,8 @@ export async function DELETE(req) {
     );
   }
 }
+
+
+
+
+

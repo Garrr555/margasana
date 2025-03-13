@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
 import { usePathname } from "next/navigation";
-import {listSideBar} from "../../../data/admin";
+import { listSideBar } from "../../../data/sidebar";
 import Link from "next/link";
 import LoginOutView from "../../layouts/loginout";
 
-export default function Sidebar() {
+export default function Sidebar({ data = [] }) {
   const pathname = usePathname();
   return (
     <div className="w-64 h-screen bg-gray-900 border-r border-gray-800 text-white/80 p-6 flex flex-col justify-between fixed top-0 left-0">
@@ -16,7 +16,7 @@ export default function Sidebar() {
           </Link>
         </div>
         <div className="space-y-4 flex flex-col gap-0">
-          {listSideBar.map((item, i) => (
+          {data.map((item, i) => (
             <Link
               key={i}
               href={item.url}
