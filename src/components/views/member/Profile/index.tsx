@@ -5,7 +5,7 @@ import { uploadFile } from "@/lib/firebase/service";
 import userServices from "@/services/user";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export default function ProfileMemberView({
@@ -19,12 +19,24 @@ export default function ProfileMemberView({
 
   const [changeImage, setChangeImage] = useState<any>({});
   const [isLoading, setIsLoading] = useState("");
-
   const [visible, setVisible] = useState(false);
+  // const [profile2, setProfile2] = useState('');
 
   const toggleVisibility = () => {
     setVisible(!visible);
   };
+
+  // const getProfile = async () => {
+  //   const {data} = await userServices.getProfile(
+  //     session.data?.accessToken
+  //   );
+  //   setProfile2(data.data)
+  // }
+  // console.log(profile2)
+
+  // useEffect(() => {
+  //   getProfile()
+  // }, [])
 
   const handleChangeProfilePicture = (e: any) => {
     e.preventDefault();
@@ -134,7 +146,7 @@ export default function ProfileMemberView({
 
   console.log(changeImage);
   console.log(changeImage.name);
-  console.log("profile: ", profile.fullname);
+  console.log("profile: ", profile.image);
 
   return (
     <MemberLayout>

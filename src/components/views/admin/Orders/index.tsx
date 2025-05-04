@@ -1,7 +1,6 @@
 import Button from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import userServices from "@/services/user";
-import MemberLayout from "@/components/layouts/MemberLayout";
 import { useSession } from "next-auth/react";
 import { convertIDR } from "@/utils/currency";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -9,12 +8,28 @@ import { FaMoneyBill1Wave } from "react-icons/fa6";
 import Script from "next/script";
 import ModalDetailOrder from "./ModalDetailOrder";
 import productServices from "@/services/product";
+import AdminLayout from "@/components/layouts/AdminLayout";
+import transactionServices from "@/services/transaction";
 
-export default function OrdersMemberView() {
+export default function OrdersAdminView() {
   const [profile, setProfile] = useState<any>({});
   const [detailOrder, setDetailOrder] = useState<any>({});
   const [products, setProducts] = useState<any>([]);
+  const [transaction, setTransaction] = useState<any>([]);
   const session: any = useSession();
+
+  console.log(session.data?.accessToken);
+
+  useEffect(() => {
+    const getAllTransaction = async () => {
+      const { data } = await transactionServices.getAllTransaction(
+        session?.data?.accessToken
+      );
+      const result = data.data;
+      setTransaction(result);
+    };
+    getAllTransaction();
+  }, []);
 
   useEffect(() => {
     if (session.data?.accessToken && Object.keys(profile).length === 0) {
@@ -37,9 +52,8 @@ export default function OrdersMemberView() {
     getAllProducts();
   }, []);
 
-  const transaction: any = profile?.transaction;
-  console.log(transaction);
-
+  const profileTransaction: any = profile?.transaction;
+  console.log(profileTransaction);
 
   return (
     <>
@@ -48,16 +62,17 @@ export default function OrdersMemberView() {
         data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
         strategy="lazyOnload"
       />
-      <MemberLayout>
+      <AdminLayout>
         <div>
           <h1 className="text-accent text-3xl font-semibold mb-2">
-            Orders History
+            Orders Management
           </h1>
           <table className="w-full border-2 border-gray-900">
             <thead>
               <tr className="bg-gray-900">
                 <th className="p-2 font-semibold">No</th>
                 <th className="p-2 text-start font-semibold">Order</th>
+                <th className="p-2 text-start font-semibold">User Name</th>
                 <th className="p-2 text-start font-semibold">Total</th>
                 <th className="p-2 text-start font-semibold">Status</th>
                 <th className="p-2 font-semibold">Action</th>
@@ -71,10 +86,13 @@ export default function OrdersMemberView() {
                 >
                   <td className="text-center">{index + 1}</td>
                   <td className="py-5">{transaction.order_id}</td>
+                  <td className="py-5">{transaction.user.fullname}</td>
                   <td>{convertIDR(transaction.total)}</td>
                   <td
                     className={`${
-                      transaction.status === "pending" ? "text-red-500" : "text-accent"
+                      transaction.status === "pending"
+                        ? "text-red-500"
+                        : "text-accent"
                     }`}
                   >
                     {transaction.status}
@@ -105,14 +123,14 @@ export default function OrdersMemberView() {
             </tbody>
           </table>
         </div>
-      </MemberLayout>
+      </AdminLayout>
       {Object.keys(detailOrder).length && (
-              <ModalDetailOrder
-                setDetailOrders={setDetailOrder}
-                detailOrders={detailOrder}
-                products={products}
-              />
-            )}
+        <ModalDetailOrder
+          setDetailOrders={setDetailOrder}
+          detailOrders={detailOrder}
+          products={products}
+        />
+      )}
     </>
   );
 }

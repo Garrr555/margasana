@@ -1,16 +1,20 @@
 "use client";
 
+import userServices from "@/services/user";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 
-type Data ={
-  data: any
-}
+type Data = {
+  data: any;
+};
 
-export default function UserBtn({data}:Data) {
-  
-  console.log("data: ", data?.user);
+export default function UserBtn({ data }: Data) {
+
+  console.log("data: ", data?.user?.image);
+
   return (
     <Link
       href="/member"
@@ -19,10 +23,13 @@ export default function UserBtn({data}:Data) {
     >
       {data ? (
         <div className="flex items-center justify-center gap-1">
-          <div className="text-2xl">
-            <FaUserCircle />
-          </div>
-          {data?.user?.fullname} 
+          <Image
+            className="rounded-full w-[80%] h-[80%] border border-accent object-scale-down"
+            src={`${data?.user?.image}`}
+            alt="profile"
+            width={40}
+            height={40}
+          />
         </div>
       ) : (
         <button

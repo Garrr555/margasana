@@ -1,11 +1,11 @@
-import CartView from "@/components/views/cart";
+import CheckoutView from "@/components/views/checkout";
 import Head from "next/head";
 
 type PropTypes = {
   setToaster: React.Dispatch<React.SetStateAction<{}>>;
 };
 
-export default function CartPage(props: PropTypes) {
+export default function CheckoutPage(props: PropTypes) {
   const { setToaster } = props;
   return (
     <>
@@ -14,7 +14,7 @@ export default function CartPage(props: PropTypes) {
       </Head>
 
       <div className="container">
-        <CartView setToaster={setToaster}/>
+        <CheckoutView setToaster={setToaster} />
       </div>
     </>
   );

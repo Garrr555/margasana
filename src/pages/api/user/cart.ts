@@ -18,12 +18,22 @@ export default async function Handler(
                         const user: any = await retrieveDataById('users', decoded.id)
                         if(user){
                             user.id = decoded.id;
-                            res.status(200).json({
-                              status: true,
-                              statusCode: 200,
-                              message: "Success",
-                              data: user.carts,
-                            });
+                            if(user.carts){
+                              res.status(200).json({
+                                status: true,
+                                statusCode: 200,
+                                message: "Success",
+                                data: user.carts,
+                              });
+                            }
+                            else{
+                                res.status(404).json({
+                                  status: false,
+                                  statusCode: 404,
+                                  message: "Not found",
+                                  data: [],
+                                });
+                            }
                         }
                         else{
                             res.status(404).json({
