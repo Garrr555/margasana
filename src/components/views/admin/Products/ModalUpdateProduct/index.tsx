@@ -20,7 +20,8 @@ type PropsType = {
 };
 
 export default function ModalUpdateProduct(props: PropsType) {
-  const { updatedProduct, setUpdatedProduct, setProductsData, setToaster } = props;
+  const { updatedProduct, setUpdatedProduct, setProductsData, setToaster } =
+    props;
   const [isLoading, setIsLoading] = useState(false);
   const [stockCount, setStockCount] = useState(updatedProduct.stock);
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
@@ -48,6 +49,9 @@ export default function ModalUpdateProduct(props: PropsType) {
       category: form.category.value,
       status: form.status.value,
       age: form.age.value,
+      date: form.date.value,
+      nik: form.nik.value,
+      religion: form.religion.value,
       stock: stock,
       image: newImageURL,
     };
@@ -63,16 +67,16 @@ export default function ModalUpdateProduct(props: PropsType) {
       setUpdatedProduct(false);
       const { data } = await productServices.getAllProducts();
       setProductsData(data.data);
-      //   setToaster({
-      //     variant: "success",
-      //     message: "Success to update product",
-      //   });
+      setToaster({
+        variant: "success",
+        message: "Success to update product",
+      });
     } else {
       setIsLoading(false);
-      //   setToaster({
-      //     variant: "error",
-      //     message: "Failed to add product",
-      //   });
+      setToaster({
+        variant: "error",
+        message: "Failed to add product",
+      });
     }
   };
 
@@ -94,10 +98,10 @@ export default function ModalUpdateProduct(props: PropsType) {
             updateProduct(form, newImageURL);
           } else {
             setIsLoading(false);
-            // setToaster({
-            //   variant: "error",
-            //   message: "Failed to update product",
-            // });
+            setToaster({
+              variant: "error",
+              message: "Failed to update product",
+            });
           }
         }
       );
@@ -108,7 +112,7 @@ export default function ModalUpdateProduct(props: PropsType) {
 
   return (
     <Modal onClose={() => setUpdatedProduct(false)}>
-      <h1 className="text-2xl text-accent font-semibold">Edit Product</h1>
+      <h1 className="text-2xl text-accent font-semibold">Edit People</h1>
       <form onSubmit={handleSubmit}>
         <div className="my-4">
           <Input
@@ -142,8 +146,8 @@ export default function ModalUpdateProduct(props: PropsType) {
           label="Status"
           name="status"
           options={[
-            { label: "Released", value: "true" },
-            { label: "Not Released", value: "false" },
+            { label: "Hidup", value: "true" },
+            { label: "Meninggal", value: "false" },
           ]}
           defaultValue={updatedProduct.status}
         />
@@ -154,6 +158,39 @@ export default function ModalUpdateProduct(props: PropsType) {
             type="number"
             placeholderreal="Insert Age"
             placeholder={updatedProduct.age}
+          />
+        </div>
+        <div className="my-4">
+          <Input
+            label="Date"
+            name="date"
+            type="date"
+            placeholderreal="Insert Age"
+            placeholder={updatedProduct.date}
+          />
+        </div>
+        <Select
+          label="Religion"
+          name="religion"
+          options={[
+            { label: "islam", value: "islam" },
+            { label: "kristen", value: "kristen" },
+            { label: "katolik", value: "katolik" },
+            { label: "hindu", value: "hindu" },
+            { label: "buddha", value: "buddha" },
+            { label: "konghucu", value: "konghucu" },
+            { label: "ateis", value: "ateis" },
+            { label: "another", value: "another" },
+          ]}
+          defaultValue={" "}
+        />
+        <div className="my-4">
+          <Input
+            label="NIK"
+            name="nik"
+            type="number"
+            placeholderreal="Insert NIK"
+            placeholder={updatedProduct.nik}
           />
         </div>
         <label htmlFor="image">Image</label>
@@ -178,7 +215,7 @@ export default function ModalUpdateProduct(props: PropsType) {
             />
           </div>
         </div>
-        <label htmlFor="stock" className="">
+        {/* <label htmlFor="stock" className="">
           Stock
         </label>
         {stockCount.map((item: { size: string; qty: number }, i: number) => (
@@ -219,7 +256,7 @@ export default function ModalUpdateProduct(props: PropsType) {
           onClick={() => setStockCount([...stockCount, { size: "", qty: 0 }])}
         >
           Add New Stock
-        </Button>
+        </Button> */}
         <div className="flex flex-col">
           <br />
 
@@ -228,7 +265,7 @@ export default function ModalUpdateProduct(props: PropsType) {
             textcolor={"text-primary"}
             type={"submit"}
           >
-            {isLoading ? "Loading..." : "Update Product"}
+            {isLoading ? "Loading..." : "Update People"}
           </Button>
         </div>
       </form>

@@ -18,7 +18,7 @@ export default function ProductPage() {
   return (
     <>
       <Head>
-        <title>Products</title>
+        <title>Resident</title>
       </Head>
       <ProductView products={products}/>
     </>

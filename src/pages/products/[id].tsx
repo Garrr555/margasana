@@ -45,7 +45,7 @@ export default function DetailProductPage(props: PropTypes) {
   return (
     <>
       <Head>
-        <title>Products Detail</title>
+        <title>Person Detail</title>
       </Head>
       <DetailProductView
         product={product}

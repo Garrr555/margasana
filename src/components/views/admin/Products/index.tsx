@@ -36,9 +36,9 @@ export default function ProductsAdminView(props: PropsType) {
     setProductsData(products);
   }, [products]);
 
-   const filteredProducts = productsData.filter((product) =>
-     product.name.toLowerCase().includes(searchQuery.toLowerCase())
-   );
+  const filteredProducts = productsData.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function ProductsAdminView(props: PropsType) {
         <div>
           <div className="my-5 flex justify-between items-center">
             <h1 className="text-accent text-3xl font-semibold mb-2">
-              Product Management
+              Resident Management
             </h1>
             <Button
               type="button"
@@ -56,7 +56,7 @@ export default function ProductsAdminView(props: PropsType) {
               icon={<FaPlus />}
             >
               {" "}
-              Add Product
+              Add People
             </Button>
           </div>
           <input
@@ -91,7 +91,7 @@ export default function ProductsAdminView(props: PropsType) {
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
                 >
-                  Category kelamin
+                  Gender
                 </th>
                 <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
@@ -103,13 +103,31 @@ export default function ProductsAdminView(props: PropsType) {
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
                 >
-                  Price
+                  Income
                 </th>
                 <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
                 >
                   Age
+                </th>
+                <th
+                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  rowSpan={2}
+                >
+                  Date
+                </th>
+                <th
+                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  rowSpan={2}
+                >
+                  Religion
+                </th>
+                <th
+                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  rowSpan={2}
+                >
+                  NIK
                 </th>
                 {/* <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
@@ -151,12 +169,23 @@ export default function ProductsAdminView(props: PropsType) {
                   <td>{product.name}</td>
                   <td className="text-center">{product.category}</td>
                   <td className="text-center">
-                    {product.status === "true"
-                      ? "Released Hidup"
-                      : "Not Released Meninggal"}
+                    {product.status === "true" ? "Hidup" : "Meninggal"}
                   </td>
-                  <td className="text-center">{convertIDR(product.price)}</td>
+                  <td className="text-center">
+                    {convertIDR(product.price)}/month
+                  </td>
                   <td className="text-center">{product.age}</td>
+                  <td className="text-center">
+                    {product.date?.toLocaleString()}
+                  </td>
+                  <td className="text-center">
+                    {product.religion && product.religion.trim() !== ""
+                      ? product.religion
+                      : "None"}
+                  </td>
+                  <td className="text-center">
+                    {product.nik ? product.nik : "None"}
+                  </td>
                   <td className="text-center">
                     <div className="flex items-center justify-center gap-2">
                       <Button
@@ -204,7 +233,7 @@ export default function ProductsAdminView(props: PropsType) {
         <ModalDeleteProduct
           setDeletedProduct={setDeletedProduct}
           deletedProduct={deletedProduct}
-          // setToaster={setToaster}
+          setToaster={setToaster}
           setProductsData={setProductsData}
         />
       )}

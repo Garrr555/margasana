@@ -15,6 +15,7 @@ type PropsTypes = {
 
 export default function ProductView(props: PropsTypes) {
   const { products } = props;
+  console.log(products);
 
   const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState<number | null>(null);
@@ -30,6 +31,8 @@ export default function ProductView(props: PropsTypes) {
   };
 
   const filteredProducts = products.filter((product) => {
+    const matchStatus = product.status === "true";
+
     const matchGender =
       selectedGenders.length === 0 ||
       selectedGenders.includes(product.category.toLowerCase());
@@ -41,7 +44,13 @@ export default function ProductView(props: PropsTypes) {
       searchQuery === "" ||
       product.name.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchGender && matchMinPrice && matchMaxPrice && matchSearchQuery;
+    return (
+      matchStatus &&
+      matchGender &&
+      matchMinPrice &&
+      matchMaxPrice &&
+      matchSearchQuery
+    );
   });
 
   const resetFilters = () => {
@@ -67,7 +76,7 @@ export default function ProductView(props: PropsTypes) {
       <div className="mt-5 flex gap-8">
         <div className="w-1/6 xl:w-[10%] fixed overflow-hidden top-20 z-20 xl:top-28">
           <p className="text-xl">
-            Product{" "}
+            People{" "}
             <span className="text-accent">({filteredProducts.length})</span>
           </p>
           <h4 className="font-semibold mt-8 mb-3">Gender</h4>
@@ -92,38 +101,6 @@ export default function ProductView(props: PropsTypes) {
               <label htmlFor="women">Women</label>
             </div>
             <hr />
-            <div className="flex flex-col gap-3">
-              <div>
-                <label htmlFor="minPrice">Min</label>
-                <input
-                  type="number"
-                  id="minPrice"
-                  className="w-full rounded px-2 py-1 mt-1 bg-secondary focus:outline-none "
-                  placeholder="Rp.100.000"
-                  value={minPrice ?? ""}
-                  onChange={(e) =>
-                    setMinPrice(
-                      e.target.value ? parseInt(e.target.value) : null
-                    )
-                  }
-                />
-              </div>
-              <div>
-                <label htmlFor="maxPrice">Max</label>
-                <input
-                  type="number"
-                  id="maxPrice"
-                  className="w-full rounded px-2 py-1 mt-1 bg-secondary focus:outline-none "
-                  placeholder="Rp.500.000"
-                  value={maxPrice ?? ""}
-                  onChange={(e) =>
-                    setMaxPrice(
-                      e.target.value ? parseInt(e.target.value) : null
-                    )
-                  }
-                />
-              </div>
-            </div>
             <div className="mt-5 w-full">
               <Button
                 onClick={resetFilters}
@@ -138,9 +115,11 @@ export default function ProductView(props: PropsTypes) {
         </div>
         <div className="w-5/6 xl:xl:w-[90%] grid grid-cols-3 xl:grid-cols-4 gap-4 ml-48 xl:ml-64">
           {filteredProducts.map((product) => (
-            <Link key={product.id} href={`/products/${product.id}`}>
+            // <Link key={product.id} href={`/products/${product.id}`}>
+            <div key={product.id}>
               <Card product={product} />
-            </Link>
+            </div>
+            // </Link>
           ))}
         </div>
       </div>

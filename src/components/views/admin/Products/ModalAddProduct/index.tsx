@@ -57,23 +57,23 @@ export default function ModalAddProduct(props: PropsType) {
               setModalAddProduct(false);
               const { data } = await productServices.getAllProducts();
               setProductsData(data.data);
-              // setToaster({
-              //   variant: "success",
-              //   message: "Success to add product",
-              // });
+              setToaster({
+                variant: "success",
+                message: "Success to add product",
+              });
             } else {
               setIsLoading(false);
-              // setToaster({
-              //   variant: "error",
-              //   message: "Failed to add product",
-              // });
+              setToaster({
+                variant: "error",
+                message: "Failed to add product",
+              });
             }
           } else {
             setIsLoading(false);
-            // setToaster({
-            //   variant: "error",
-            //   message: "Failed to add product",
-            // });
+            setToaster({
+              variant: "error",
+              message: "Failed to add product",
+            });
           }
         }
       );
@@ -89,7 +89,7 @@ export default function ModalAddProduct(props: PropsType) {
         size: stock.size,
         qty: parseInt(`${stock.qty}`),
       };
-    })
+    });
     const data = {
       name: form.name.value,
       price: parseInt(form.price.value),
@@ -97,6 +97,9 @@ export default function ModalAddProduct(props: PropsType) {
       status: form.status.value,
       stock: stock,
       age: form.age.value,
+      religion: form.religion.value,
+      nik: form.nik.value,
+      date: form.date.value,
       image: "",
     };
 
@@ -113,22 +116,22 @@ export default function ModalAddProduct(props: PropsType) {
   };
   return (
     <Modal onClose={() => setModalAddProduct(false)}>
-      <h1 className="text-2xl text-accent font-semibold">Add Product</h1>
+      <h1 className="text-2xl text-accent font-semibold">Add People</h1>
       <form onSubmit={handleSubmit}>
         <div className="my-4">
           <Input
             label="Name"
             name="name"
             type="text"
-            placeholderreal="Insert Product Name"
+            placeholderreal="Insert Name"
           />
         </div>
         <div className="my-4">
           <Input
-            label="Price"
+            label="Income"
             name="price"
             type="number"
-            placeholderreal="Insert Product Price"
+            placeholderreal="Insert Income"
           />
         </div>
 
@@ -145,8 +148,8 @@ export default function ModalAddProduct(props: PropsType) {
           label="Status"
           name="status"
           options={[
-            { label: "Released", value: "true" },
-            { label: "Not Released", value: "false" },
+            { label: "Hidup", value: "true" },
+            { label: "Meninggal", value: "false" },
           ]}
           defaultValue={""}
         />
@@ -156,6 +159,37 @@ export default function ModalAddProduct(props: PropsType) {
             name="age"
             type="number"
             placeholderreal="Insert Age"
+          />
+        </div>
+        <div className="my-4">
+          <Input
+            label="Date"
+            name="date"
+            type="date"
+            placeholderreal="Insert Date"
+          />
+        </div>
+        <Select
+          label="Religion"
+          name="religion"
+          options={[
+            { label: "islam", value: "islam" },
+            { label: "kristen", value: "kristen" },
+            { label: "katolik", value: "katolik" },
+            { label: "hindu", value: "hindu" },
+            { label: "buddha", value: "buddha" },
+            { label: "konghucu", value: "konghucu" },
+            { label: "ateis", value: "ateis" },
+            { label: "another", value: "another" },
+          ]}
+          defaultValue={" "}
+        />
+        <div className="my-4">
+          <Input
+            label="NIK"
+            name="nik"
+            type="number"
+            placeholderreal="Insert NIK"
           />
         </div>
         <label htmlFor="image">Image</label>
@@ -182,7 +216,7 @@ export default function ModalAddProduct(props: PropsType) {
             />
           </div>
         </div>
-        <label htmlFor="stock" className="">
+        {/* <label htmlFor="stock" className="">
           Stock
         </label>
         {stockCount.map((item: { size: string; qty: number }, i: number) => (
@@ -221,7 +255,7 @@ export default function ModalAddProduct(props: PropsType) {
           onClick={() => setStockCount([...stockCount, { size: "", qty: 0 }])}
         >
           Add New Stock
-        </Button>
+        </Button> */}
         <div className="flex flex-col">
           <br />
           <Button
@@ -229,7 +263,7 @@ export default function ModalAddProduct(props: PropsType) {
             textcolor={"text-primary"}
             type={"submit"}
           >
-            {isLoading ? "Loading..." : "Add Product"}
+            {isLoading ? "Loading..." : "Add People"}
           </Button>
         </div>
       </form>

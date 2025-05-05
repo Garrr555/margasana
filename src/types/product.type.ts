@@ -7,8 +7,11 @@ export type Product = {
     image: string;
     age?: string;
     description?: string;
+    date?: Date;
     created_at: Date;
     updated_at: Date;
+    nik?: number;
+    religion?: string;
     stock: [
         {
             size: string;

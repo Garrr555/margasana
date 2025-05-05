@@ -25,11 +25,6 @@ export default function Card(props: PropsTypes){
               <p className="font-bold">{product.name}</p>
               <p className="font-light">{product.category}</p>
             </div>
-            <br />
-            <hr />
-            <p className="font-extrabold text-accent text-end">
-              {convertIDR(product.price)}
-            </p>
           </div>
         </div>
       </div>
