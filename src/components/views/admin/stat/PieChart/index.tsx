@@ -8,18 +8,19 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 type Props = {
   nama: string;
+  parameter: "kelamin" | "agama";
 };
 
 interface Product {
   id: number;
   name: string;
-  category: "men" | "women"; // Hanya bisa bernilai "men" atau "women"
-  status: string; // Status aktif atau tidak
+  category: "men" | "women";
+  religion: string;
+  status: string;
 }
 
-export default function PieChart({ nama }: Props) {
+export default function PieChart({ nama, parameter }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
-  console.log(products)
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -34,39 +35,60 @@ export default function PieChart({ nama }: Props) {
     (product) => product.status === "true"
   );
 
-  // Hitung jumlah penduduk berdasarkan jenis kelamin
-  const menCount = activeProducts.filter((p) => p.category === "men").length;
-  const womenCount = activeProducts.filter(
-    (p) => p.category === "women"
-  ).length;
+  let labels: string[] = [];
+  let counts: number[] = [];
+
+  if (parameter === "kelamin") {
+    const menCount = activeProducts.filter((p) => p.category === "men").length;
+    const womenCount = activeProducts.filter(
+      (p) => p.category === "women"
+    ).length;
+
+    labels = ["Laki-laki", "Perempuan"];
+    counts = [menCount, womenCount];
+  } else if (parameter === "agama") {
+    const religionMap: Record<string, number> = {};
+
+    activeProducts.forEach((product) => {
+      const religion = product.religion || "Tidak Diketahui";
+      religionMap[religion] = (religionMap[religion] || 0) + 1;
+    });
+
+    labels = Object.keys(religionMap);
+    counts = Object.values(religionMap);
+  }
 
   const data = {
-    labels: ["Laki-laki", "Perempuan"],
+    labels,
     datasets: [
       {
-        data: [menCount, womenCount],
-        backgroundColor: ["#3b82f6", "#ef4444"], // Biru untuk laki-laki, Merah untuk perempuan
+        data: counts,
+        backgroundColor: [
+          "#3b82f6",
+          "#ef4444",
+          "#10b981",
+          "#f59e0b",
+          "#8b5cf6",
+          "#ec4899",
+          "#14b8a6",
+          "#00ff99",
+        ],
         hoverOffset: 10,
       },
     ],
   };
 
-  // Opsi untuk mengatur ukuran chart
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Agar bisa dikustomisasi ukurannya
+    maintainAspectRatio: false,
   };
 
   return (
-   
-      
-        <div className="bg-secondary shadow-lg rounded-lg p-6 w-full">
-          <h2 className="text-xl font-semibold text-accent text-center mb-4">{`${nama}`}</h2>
-          <div className="w-full h-96 mx-auto">
-            <Pie data={data} options={options} />
-          </div>
-        </div>
-      
-    
+    <div className="bg-secondary p-6 w-full">
+      <h2 className="text-xl font-semibold text-accent text-center mb-4">{`${nama}`}</h2>
+      <div className="w-full h-96 mx-auto">
+        <Pie data={data} options={options} />
+      </div>
+    </div>
   );
 }
