@@ -17,7 +17,7 @@ export default function UserBtn({ data }: Data) {
 
   return (
     <Link
-      href="/member"
+      href="/member/profile"
       className={`"text-accent"
          font-medium transition-all hover:text-accent  text-lg`}
     >

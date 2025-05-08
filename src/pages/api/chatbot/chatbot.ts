@@ -55,6 +55,12 @@ export default async function handler(
 
     return res.status(200).json({ message: text });
   } catch (error: any) {
+    if (error.status === 429) {
+      return res.status(429).json({
+        error:
+          "Kamu telah melewati batas permintaan untuk saat ini. Silakan coba lagi nanti.",
+      });
+    }
     console.error("Gemini API error:", error);
     return res.status(500).json({
       error: error.message || "Internal Server Error",

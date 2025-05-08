@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MapContainer,
   Marker,
@@ -16,6 +16,7 @@ import "leaflet/dist/leaflet.css";
 import PopUp from "@/components/fragments/Popup";
 import dynamic from "next/dynamic";
 import { usePopulationStats } from "@/hook/demografi";
+import * as turf from "@turf/turf";
 
 // Komponen heatmap dimuat secara dinamis
 const HeatmapLayer = dynamic(() => import("@/components/fragments/Heatmap"), {
@@ -94,15 +95,20 @@ const LocationTracker = ({
 };
 
 // Fungsi membuat titik heatmap
-const generateHeatmapPoints = (
+const generateHeatmapPointsInPolygon = (
   center: [number, number],
   radiusMeters: number,
-  pointsCount: number
+  pointsCount: number,
+  polygonCoords: [number, number][]
 ): [number, number, number][] => {
   const points: [number, number, number][] = [];
   const earthRadius = 6371000;
 
-  for (let i = 0; i < pointsCount; i++) {
+  const polygon = turf.polygon([
+    polygonCoords.map(([lat, lng]) => [lng, lat]), // GeoJSON format
+  ]);
+
+  while (points.length < pointsCount) {
     const angle = Math.random() * 2 * Math.PI;
     const distance = Math.random() * radiusMeters;
 
@@ -114,13 +120,17 @@ const generateHeatmapPoints = (
 
     const lat = center[0] + deltaLat * (180 / Math.PI);
     const lng = center[1] + deltaLng * (180 / Math.PI);
-    const intensity = 0.6 + Math.random() * 0.4;
 
-    points.push([lat, lng, intensity]);
+    const pt = turf.point([lng, lat]);
+    if (turf.booleanPointInPolygon(pt, polygon)) {
+      const intensity = 0.6 + Math.random() * 0.4;
+      points.push([lat, lng, intensity]);
+    }
   }
 
   return points;
 };
+
 
 // Komponen utama halaman peta
 export default function MapPage(prop: Props) {
@@ -128,10 +138,34 @@ export default function MapPage(prop: Props) {
   const [showHeatmap, setShowHeatmap] = useState(false);
   const { total, kepadatan, kelamin, usia } = prop;
   const center: [number, number] = [-7.5383336, 109.1365494];
+  const {
+    totalPopulation,
+    menCount,
+    womenCount,
+    averageAge,
+    populationDensity,
+    growthRate,
+  } = usePopulationStats();
+  console.log(totalPopulation)
 
-  const [heatmapPoints] = useState(() =>
-    generateHeatmapPoints(center, 500, 10)
-  );
+
+  const [heatmapPoints, setHeatmapPoints] = useState<
+    [number, number, number][]
+  >([]);
+
+  useEffect(() => {
+    if (totalPopulation > 0) {
+      const points = generateHeatmapPointsInPolygon(
+        center,
+        500,
+        totalPopulation,
+        margasanaCoords
+      );
+      setHeatmapPoints(points);
+    }
+  }, [totalPopulation]);
+
+
 
   return (
     <div className="relative container flex justify-center pb-10 h-screen">

@@ -32,7 +32,7 @@ const links = [
   },
   {
     name: "Admin",
-    path: "/admin",
+    path: "/admin/users",
     logo: FaUserCog,
     role: "admin",
   },
