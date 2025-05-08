@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Toaster from "@/components/ui/Toaster";
 import { JetBrains_Mono } from "next/font/google";
 import { useEffect, useState } from "react";
+import "leaflet/dist/leaflet.css";
 config.autoAddCss = false;
 
 declare global {

@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Desa Margasana"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [109.1345, -7.537],
+            [109.138, -7.537],
+            [109.138, -7.54],
+            [109.1345, -7.54],
+            [109.1345, -7.537]
+          ]
+        ]
+      }
+    }
+  ]
+}
