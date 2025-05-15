@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-const disableNavbar = ["auth", "admin", "member", "cart", "checkout"];
+const disableNavbar = ["auth", "admin", "member", "cart", "checkout", "products/"];
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],

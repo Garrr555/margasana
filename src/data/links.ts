@@ -4,6 +4,7 @@ import { TiHome } from "react-icons/ti";
 import { RiCustomerService2Fill, RiRobot3Fill } from "react-icons/ri";
 import { FaUserCog, FaMapMarkedAlt, FaBoxes } from "react-icons/fa";
 import { FaCartShopping, FaUsers } from "react-icons/fa6";
+import { IoStatsChart } from "react-icons/io5";
 
 const links = [
   {
@@ -25,9 +26,9 @@ const links = [
     role: "member",
   },
   {
-    name: "Residents",
+    name: "Statistic",
     path: "/products",
-    logo: FaUsers,
+    logo: IoStatsChart,
     role: "member",
   },
   {

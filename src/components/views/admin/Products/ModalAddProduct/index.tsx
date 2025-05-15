@@ -101,6 +101,8 @@ export default function ModalAddProduct(props: PropsType) {
       nik: form.nik.value,
       date: form.date.value,
       image: "",
+      rt: form.rt.value,
+      rw: form.rw.value,
     };
 
     console.log(data);
@@ -190,6 +192,22 @@ export default function ModalAddProduct(props: PropsType) {
             name="nik"
             type="number"
             placeholderreal="Insert NIK"
+          />
+        </div>
+        <div className="my-4">
+          <Input
+            label="Rt"
+            name="rt"
+            type="number"
+            placeholderreal="Insert Rt"
+          />
+        </div>
+        <div className="my-4">
+          <Input
+            label="Rw"
+            name="rw"
+            type="number"
+            placeholderreal="Insert Rw"
           />
         </div>
         <label htmlFor="image">Image</label>

@@ -3,7 +3,12 @@ import userServices from "@/services/user";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-export default function ProfilePage({setToaster}:any) {
+type PropTypes = {
+  setToaster: React.Dispatch<React.SetStateAction<{}>>;
+};
+
+export default function ProfilePage(props: PropTypes) {
+  const { setToaster } = props;
 
   const [profile, setProfile] = useState<any>({});
   const session: any = useSession()

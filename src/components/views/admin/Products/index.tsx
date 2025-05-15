@@ -99,12 +99,12 @@ export default function ProductsAdminView(props: PropsType) {
                 >
                   Status
                 </th>
-                <th
+                {/* <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
                 >
                   Income
-                </th>
+                </th> */}
                 <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
@@ -115,7 +115,13 @@ export default function ProductsAdminView(props: PropsType) {
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
                 >
-                  Date
+                  Rt
+                </th>
+                <th
+                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  rowSpan={2}
+                >
+                  Rw
                 </th>
                 <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
@@ -123,17 +129,11 @@ export default function ProductsAdminView(props: PropsType) {
                 >
                   Religion
                 </th>
-                <th
+                {/* <th
                   className="p-2 font-semibold border-x-2 border border-gray-800"
                   rowSpan={2}
                 >
                   NIK
-                </th>
-                {/* <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
-                  colSpan={2}
-                >
-                  Stock
                 </th> */}
                 <th
                   className="p-2 font-semibold border-l-2 border border-gray-800"
@@ -142,14 +142,6 @@ export default function ProductsAdminView(props: PropsType) {
                   Action
                 </th>
               </tr>
-              {/* <tr className="bg-gray-900">
-                <th className="p-2 font-semibold border-x-2 border border-gray-800">
-                  Size
-                </th>
-                <th className="p-2 font-semibold border-x-2 border border-gray-800">
-                  Qty
-                </th>
-              </tr> */}
             </thead>
             <tbody>
               {filteredProducts.map((product, index) => (
@@ -171,21 +163,27 @@ export default function ProductsAdminView(props: PropsType) {
                   <td className="text-center">
                     {product.status === "true" ? "Hidup" : "Meninggal"}
                   </td>
-                  <td className="text-center">
+                  {/* <td className="text-center">
                     {convertIDR(product.price)}/month
-                  </td>
+                  </td> */}
                   <td className="text-center">{product.age}</td>
-                  <td className="text-center">
+                  {/* <td className="text-center">
                     {product.date?.toLocaleString()}
+                  </td> */}
+                  <td className="text-center">
+                    {product?.rt}
+                  </td>
+                  <td className="text-center">
+                    {product?.rw}
                   </td>
                   <td className="text-center">
                     {product.religion && product.religion.trim() !== ""
                       ? product.religion
                       : "None"}
                   </td>
-                  <td className="text-center">
+                  {/* <td className="text-center">
                     {product.nik ? product.nik : "None"}
-                  </td>
+                  </td> */}
                   <td className="text-center">
                     <div className="flex items-center justify-center gap-2">
                       <Button

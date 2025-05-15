@@ -24,6 +24,10 @@ export default function Card(props: PropsTypes){
             <div>
               <p className="font-bold">{product.name}</p>
               <p className="font-light">{product.category}</p>
+              <p className="font-light">{product.religion}</p>
+              <br />
+              <hr />
+              <p className="font-light text-accent">{product.nik}</p>
             </div>
           </div>
         </div>

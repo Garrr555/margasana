@@ -83,15 +83,31 @@ export default function DetailProductView(props: PropTypes) {
           />
         </div>
         <div className="w-1/2 h-[450px] xl:h-[600px] flex flex-col justify-between mx-auto py-8">
-          <div>
-            <h1 className="text-2xl font-extrabold">{product?.name}</h1>
-            <h3 className="text-sm font-extralight text-white/80">
-              {product?.category}
+          <div className="flex flex-col gap-4">
+            <h1 className="text-4xl font-extrabold">{product?.name}</h1>
+            <br />
+            <h3 className="text-xl font-extralight text-white/80">
+              Gender: {product?.category}
+            </h3>
+            <h3 className="text-xl font-extralight text-white/80">
+              Age: {product?.age}
+            </h3>
+            <h3 className="text-xl font-extralight text-white/80">
+              Date: {product?.date}
+            </h3>
+            <h3 className="text-xl font-extralight text-white/80">
+              Religion: {product?.religion}
+            </h3>
+            <h3 className="text-xl font-extralight text-white/80">
+              Income: {convertIDR(product?.price)}
+            </h3>
+            <h3 className="text-xl font-extralight text-white/80">
+              Rt: {product?.rt} Rw: {product?.rw}
             </h3>
             <br />
-            <h3 className="text-xl text-accent font-bold">{convertIDR(product?.price)}</h3>
+            <h3 className="text-xl text-accent font-bold">{product?.nik}</h3>
           </div>
-          <div>
+          {/* <div>
             <p className="font-light text-sm">Select Size</p>
             <div className="w-full grid grid-cols-3 xl:grid-cols-4 gap-2 my-3">
               {product?.stock?.map(
@@ -134,9 +150,9 @@ export default function DetailProductView(props: PropTypes) {
                 }
               )}
             </div>
-          </div>
+          </div> */}
           <div className="w-full">
-            <Button
+            {/* <Button
               type={status === "authenticated" ? "submit" : "button"}
               bgcolor="bg-accent rounded-lg w-full"
               textcolor="text-primary text-2xl"
@@ -147,7 +163,7 @@ export default function DetailProductView(props: PropTypes) {
               }}
             >
               {<FaCartPlus />} <span className="text-xl">add to cart</span>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

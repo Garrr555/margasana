@@ -48,7 +48,7 @@ export default function ProfileMemberView({
         profile.id,
         file,
         newName,
-        'users',
+        "users",
         async (status: boolean, newImageURL: string) => {
           console.log(status);
           if (status) {
@@ -71,18 +71,26 @@ export default function ProfileMemberView({
                 image: newImageURL,
               });
               setToaster({
-                variant: 'success',
-                message: 'Success Update Profile'
-              })
+                type: "success",
+                message: "Success Update Profile",
+              });
               console.log(profile);
               setChangeImage({});
               e.target[0].value = "";
             } else {
               setIsLoading("");
+              setToaster({
+                type: "error",
+                message: "Failed Update Profile",
+              });
             }
           } else {
             setIsLoading("");
             setChangeImage({});
+            setToaster({
+              type: "error",
+              message: "Failed Update Profile",
+            });
           }
         }
       );
@@ -112,9 +120,17 @@ export default function ProfileMemberView({
         fullname: data.fullname,
         phone: data.phone,
       });
+      setToaster({
+        type: "success",
+        message: "Success Update Profile",
+      });
       form.reset();
     } else {
       setIsLoading("");
+      setToaster({
+        type: "error",
+        message: "Failed Update Profile",
+      });
     }
   }
 

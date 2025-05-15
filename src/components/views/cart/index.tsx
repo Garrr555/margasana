@@ -51,25 +51,25 @@ export default function CartView(props: PropTypes) {
     return product;
   };
 
-  const getOptionsSize = (id: string, selected: string) => {
-    const product = products.find((product) => product.id === id);
-    console.log(product?.stock);
+  // const getOptionsSize = (id: string, selected: string) => {
+  //   const product = products.find((product) => product.id === id);
+  //   console.log(product?.stock);
 
-    const options = product?.stock.map(
-      (stock: { size: string; qty: number }) => {
-        if (stock.qty > 0) {
-          return {
-            label: stock.size,
-            value: stock.size,
-            selected: stock.size === selected,
-          };
-        }
-      }
-    );
-    const data = options?.filter((option) => option !== undefined);
-    console.log(data);
-    return data;
-  };
+  //   const options = product?.stock.map(
+  //     (stock: { size: string; qty: number }) => {
+  //       if (stock.qty > 0) {
+  //         return {
+  //           label: stock.size,
+  //           value: stock.size,
+  //           selected: stock.size === selected,
+  //         };
+  //       }
+  //     }
+  //   );
+  //   const data = options?.filter((option) => option !== undefined);
+  //   console.log(data);
+  //   return data;
+  // };
 
   const getTotalPrice = () => {
     const total = cart.reduce(
@@ -131,14 +131,14 @@ export default function CartView(props: PropTypes) {
                       </p>
 
                       <div className="flex items-center gap-2">
-                        <label className="text-md font-light flex items-center gap-2">
+                        {/* <label className="text-md font-light flex items-center gap-2">
                           size
                           <Select
                             name="size"
                             options={getOptionsSize(item.id, item.size)}
                             disable={true}
                           ></Select>
-                        </label>
+                        </label> */}
                         <div className="text-accent">
                           <p>|</p>
                           <p className="-my-3">|</p>

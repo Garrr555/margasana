@@ -18,6 +18,7 @@ export default function ProductView(props: PropsTypes) {
   console.log(products);
 
   const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
+  const [selectedReligions, setSelectedReligions] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -30,26 +31,40 @@ export default function ProductView(props: PropsTypes) {
     );
   };
 
-  const filteredProducts = products.filter((product) => {
+  const handleReligionChange = (religion: string) => {
+    setSelectedReligions((prev) =>
+      prev.includes(religion)
+        ? prev.filter((r) => r !== religion)
+        : [...prev, religion]
+    );
+  };
+
+  const filteredProducts = products.filter((product: any) => {
     const matchStatus = product.status === "true";
 
     const matchGender =
       selectedGenders.length === 0 ||
-      selectedGenders.includes(product.category.toLowerCase());
+      selectedGenders.includes(product.category?.toLowerCase());
+
+    const matchReligion =
+      selectedReligions.length === 0 ||
+      selectedReligions.includes(product.religion?.toLowerCase());
 
     const matchMinPrice = minPrice === null || product.price >= minPrice;
     const matchMaxPrice = maxPrice === null || product.price <= maxPrice;
 
     const matchSearchQuery =
       searchQuery === "" ||
-      product.name.toLowerCase().includes(searchQuery.toLowerCase());
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.nik?.includes(searchQuery.toLowerCase());
 
     return (
       matchStatus &&
       matchGender &&
       matchMinPrice &&
       matchMaxPrice &&
-      matchSearchQuery
+      matchSearchQuery &&
+      matchReligion
     );
   });
 
@@ -61,8 +76,9 @@ export default function ProductView(props: PropsTypes) {
   };
 
   return (
-    <div className="container mb-5 ">
-      <div className="mt-3 w-full bg-primary flex flex-col items-end sticky h-fit top-20 right-0 xl:top-28 z-10 pb-4">
+    <div className=" mb-5 ">
+      <div className=" w-full bg-primary flex flex-col items-end sticky h-20 top-0 right-0 z-10 pb-4">
+        <br />
         <Input
           type="text"
           placeholder="Search"
@@ -72,15 +88,16 @@ export default function ProductView(props: PropsTypes) {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <br />
       </div>
-      <div className="mt-5 flex gap-8">
-        <div className="w-1/6 xl:w-[10%] fixed overflow-hidden top-20 z-20 xl:top-28">
+      <div className="mt-5 flex gap-8 container">
+        <div className="w-1/6 xl:w-[10%] fixed overflow-hidden top-10 z-20">
           <p className="text-xl">
             People{" "}
             <span className="text-accent">({filteredProducts.length})</span>
           </p>
-          <h4 className="font-semibold mt-8 mb-3">Gender</h4>
           <div className="flex flex-col justify-center gap-3">
+            <h4 className="font-semibold mt-2 text-accent">Gender</h4>
             <div className="flex gap-2 xl:text-xl">
               <input
                 type="checkbox"
@@ -101,6 +118,83 @@ export default function ProductView(props: PropsTypes) {
               <label htmlFor="women">Women</label>
             </div>
             <hr />
+            <h4 className="font-semibold mt-2 text-accent">Religion</h4>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="islam"
+                className=""
+                checked={selectedReligions.includes("islam")}
+                onChange={() => handleReligionChange("islam")}
+              />
+              <label htmlFor="islam">Islam</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="kristen"
+                checked={selectedReligions.includes("kristen")}
+                onChange={() => handleReligionChange("kristen")}
+              />
+              <label htmlFor="kristen">Kristen</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="katolik"
+                className=""
+                checked={selectedReligions.includes("katolik")}
+                onChange={() => handleReligionChange("katolik")}
+              />
+              <label htmlFor="katolik">Katolik</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="hindu"
+                checked={selectedReligions.includes("hindu")}
+                onChange={() => handleReligionChange("hindu")}
+              />
+              <label htmlFor="hindu">Hindu</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="buddha"
+                className=""
+                checked={selectedReligions.includes("buddha")}
+                onChange={() => handleReligionChange("buddha")}
+              />
+              <label htmlFor="buddha">Buddha</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="konghucu"
+                checked={selectedReligions.includes("konghucu")}
+                onChange={() => handleReligionChange("konghucu")}
+              />
+              <label htmlFor="konghucu">Konghucu</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="ateis"
+                className=""
+                checked={selectedReligions.includes("ateis")}
+                onChange={() => handleReligionChange("ateis")}
+              />
+              <label htmlFor="ateis">Ateis</label>
+            </div>
+            <div className="flex gap-2 xl:text-xl">
+              <input
+                type="checkbox"
+                id="none"
+                checked={selectedReligions.includes("")}
+                onChange={() => handleReligionChange("")}
+              />
+              <label htmlFor="none">None</label>
+            </div>
             <div className="mt-5 w-full">
               <Button
                 onClick={resetFilters}
@@ -115,11 +209,11 @@ export default function ProductView(props: PropsTypes) {
         </div>
         <div className="w-5/6 xl:xl:w-[90%] grid grid-cols-3 xl:grid-cols-4 gap-4 ml-48 xl:ml-64">
           {filteredProducts.map((product) => (
-            // <Link key={product.id} href={`/products/${product.id}`}>
-            <div key={product.id}>
-              <Card product={product} />
-            </div>
-            // </Link>
+            <Link key={product.id} href={`/products/${product.id}`}>
+              <div key={product.id}>
+                <Card product={product} />
+              </div>
+            </Link>
           ))}
         </div>
       </div>

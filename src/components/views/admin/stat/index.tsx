@@ -23,7 +23,7 @@ export default function StatAdminView() {
     setWaktu(!waktu);
   }
   return (
-    <AdminLayout>
+
       <div className="flex flex-col justify-center items-start gap-5">
         <div className="w-full flex justify-end items-center">
           <Button
@@ -85,6 +85,6 @@ export default function StatAdminView() {
 
         <div>{/* <Doughnut /> */}</div>
       </div>
-    </AdminLayout>
+
   );
 }

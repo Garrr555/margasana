@@ -12,7 +12,9 @@ export type Product = {
     updated_at: Date;
     nik?: number;
     religion?: string;
-    stock: [
+    rt?: number;
+    rw?: number;
+    stock?: [
         {
             size: string;
             qty: number;

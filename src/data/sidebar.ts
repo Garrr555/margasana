@@ -1,8 +1,7 @@
-import { MdDashboard } from "react-icons/md";
-import { FaBox, FaCartShopping, FaPerson } from "react-icons/fa6";
-import { FaUsers, FaMapMarkedAlt } from "react-icons/fa";
+import {FaPerson, FaUsers } from "react-icons/fa6";
+import { FaMapMarkedAlt } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import { IoStatsChart } from "react-icons/io5";
+import { RiCustomerService2Fill, RiUserSettingsFill } from "react-icons/ri";
 
 export const listSideBarAdmin = [
   // {
@@ -13,7 +12,7 @@ export const listSideBarAdmin = [
   {
     title: "Users",
     url: "/admin/users",
-    icon: FaUsers,
+    icon: RiUserSettingsFill,
   },
   {
     title: "Resident",
@@ -21,9 +20,9 @@ export const listSideBarAdmin = [
     icon: FaPerson,
   },
   {
-    title: "Statistic",
+    title: "Villages",
     url: "/admin/stat",
-    icon: IoStatsChart,
+    icon: FaUsers,
   },
   {
     title: "Map",
