@@ -22,6 +22,7 @@ interface PopulationStats {
   averageAge: number;
   populationDensity: number;
   growthRate: number | null;
+  activeProducts: Product[];
 }
 
 export function usePopulationStats(): PopulationStats {
@@ -33,6 +34,7 @@ export function usePopulationStats(): PopulationStats {
     averageAge: 0,
     populationDensity: 0,
     growthRate: null,
+    activeProducts: [],
   });
 
   useEffect(() => {
@@ -43,6 +45,8 @@ export function usePopulationStats(): PopulationStats {
         const activeProducts: Product[] = data.data.filter(
           (product: Product) => product.status === "true"
         );
+
+        console.log(activeProducts)
 
         if (!activeProducts || activeProducts.length === 0) {
           console.warn("Tidak ada data populasi tersedia.");
@@ -107,6 +111,7 @@ export function usePopulationStats(): PopulationStats {
           averageAge,
           populationDensity,
           growthRate,
+          activeProducts,
         });
       } catch (error) {
         console.error("Error fetching population data:", error);

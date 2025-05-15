@@ -184,7 +184,7 @@ export default function ModalUpdateProduct(props: PropsType) {
             { label: "ateis", value: "ateis" },
             { label: "another", value: "another" },
           ]}
-          defaultValue={" "}
+          defaultValue={updatedProduct.religion}
         />
         <div className="my-4">
           <Input
@@ -195,7 +195,7 @@ export default function ModalUpdateProduct(props: PropsType) {
             placeholder={updatedProduct.nik}
           />
         </div>
-        <div className="my-4">
+        {/* <div className="my-4">
           <Input
             label="Rt"
             name="rt"
@@ -212,7 +212,28 @@ export default function ModalUpdateProduct(props: PropsType) {
             placeholderreal="Insert Rw"
             placeholder={updatedProduct.rw}
           />
-        </div>
+        </div> */}
+        <Select
+                  label="Rt"
+                  name="rt"
+                  options={[
+                    { label: "01", value: 1 },
+                    { label: "02", value: 2 },
+                    { label: "03", value: 3 },
+                    { label: "04", value: 4 },
+                  ]}
+                  defaultValue={updatedProduct.rt}
+                />
+                <Select
+                  label="Rw"
+                  name="rw"
+                  options={[
+                    { label: "01", value: 1 },
+                    { label: "02", value: 2 },
+                    { label: "03", value: 3 },
+                  ]}
+                  defaultValue={updatedProduct.rw}
+                />
         <label htmlFor="image">Image</label>
         <div className="flex items-center gap-5 mb-5 w-full">
           <Image

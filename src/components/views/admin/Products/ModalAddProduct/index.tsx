@@ -194,7 +194,7 @@ export default function ModalAddProduct(props: PropsType) {
             placeholderreal="Insert NIK"
           />
         </div>
-        <div className="my-4">
+        {/* <div className="my-4">
           <Input
             label="Rt"
             name="rt"
@@ -209,7 +209,28 @@ export default function ModalAddProduct(props: PropsType) {
             type="number"
             placeholderreal="Insert Rw"
           />
-        </div>
+        </div> */}
+        <Select
+          label="Rt"
+          name="rt"
+          options={[
+            { label: "01", value: 1 },
+            { label: "02", value: 2 },
+            { label: "03", value: 3 },
+            { label: "04", value: 4 },
+          ]}
+          defaultValue={" "}
+        />
+        <Select
+          label="Rw"
+          name="rw"
+          options={[
+            { label: "01", value: 1 },
+            { label: "02", value: 2 },
+            { label: "03", value: 3 },
+          ]}
+          defaultValue={" "}
+        />
         <label htmlFor="image">Image</label>
         <div className="flex items-center justify-center gap-5 mb-5 w-full">
           {uploadedImage ? (

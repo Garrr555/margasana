@@ -7,9 +7,9 @@ import {
   Polygon,
   Popup,
   TileLayer,
-  useMap,
   useMapEvents,
   GeoJSON,
+  useMap,
 } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -17,8 +17,8 @@ import PopUp from "@/components/fragments/Popup";
 import dynamic from "next/dynamic";
 import { usePopulationStats } from "@/hook/demografi";
 import * as turf from "@turf/turf";
+import rtrw from "@/data/rtrw.json";
 
-// Komponen heatmap dimuat secara dinamis
 const HeatmapLayer = dynamic(() => import("@/components/fragments/Heatmap"), {
   ssr: false,
 });
@@ -30,71 +30,37 @@ type Props = {
   usia: boolean;
 };
 
-// Koordinat Polygon batas desa Margasana
 const margasanaCoords: any = [
-  [-7.542342097110234, 109.13597832000801],
-  [-7.54247823790711, 109.13716278246126],
-  [-7.542069814738854, 109.13759193590364],
-  [-7.542171920891644, 109.1386734031023],
-  [-7.543346135048223, 109.13958320892402],
-  [-7.543312100408171, 109.14009819305488],
-  [-7.540793490665171, 109.13930854967317],
-  [-7.538428027153751, 109.13946304517435],
-  [-7.5364879964945155, 109.13870773485384],
-  [-7.535228673928965, 109.13700828826973],
-  [-7.533628988454129, 109.1370254541455],
-  [-7.533611970752495, 109.13536033800325],
-  [-7.535466924372265, 109.13642463932617],
-  [-7.537492048660166, 109.13611564832378],
-  [-7.5386662755122735, 109.13542900281597],
-  [-7.53967032262667, 109.13524017556325],
-  [-7.539789446805067, 109.13606415069648],
-  [-7.541780514815539, 109.13573799381835],
-  [-7.542342097110234, 109.13597832000801], // titik pertama untuk menutup polygon
+  [-7.533138083431965, 109.13501955115498],
+  [-7.5337951288467195, 109.13765555273943],
+  [-7.53533320853461, 109.13839363318345],
+  [-7.537110206421758, 109.13907146216269],
+  [-7.538678139678808, 109.1396137253447],
+  [-7.5411420233246105, 109.13970410254291],
+  [-7.542575549172739, 109.1399601712672],
+  [-7.542978727461772, 109.13883045630405],
+  [-7.543456567911051, 109.13739948401525],
+  [-7.543232580266178, 109.13631495764884],
+  [-7.542381426158528, 109.13541118567645],
+  [-7.540395393397063, 109.13517017981775],
+  [-7.539379974630819, 109.13488398535998],
+  [-7.538334688117715, 109.1352906827471],
+  [-7.537155004594169, 109.13577269446444],
+  [-7.535273477386596, 109.13539612281085],
+  [-7.533854860198545, 109.13495929969025],
+  [-7.533108217707678, 109.13503461402286],
 ];
 
-// Icon marker kustom
 const newIcon = new Icon({
   iconUrl: "/marker.svg",
   iconSize: [40, 40],
 });
 
-// Komponen minimap
-const MiniMapComponent = () => {
-  const map = useMap();
-  return (
-    <div className="absolute top-4 right-4 w-32 h-32 border-2 border-primary shadow-md rounded-md overflow-hidden z-[1000]">
-      <MapContainer
-        center={map.getCenter()}
-        zoom={map.getZoom() - 7}
-        scrollWheelZoom={true}
-        className="w-full h-full"
-        dragging={true}
-        zoomControl={false}
-        attributionControl={false}
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={map.getCenter()} icon={newIcon} />
-      </MapContainer>
-    </div>
-  );
+const normalizeRT_RW = (val: any) => {
+  const str = String(val).trim();
+  return str.length === 1 ? "0" + str : str;
 };
 
-// Tracker posisi kursor
-const LocationTracker = ({
-  setCoords,
-}: {
-  setCoords: (coords: { lat: number; lng: number }) => void;
-}) => {
-  useMapEvents({
-    mousemove: (event) => {
-      setCoords({ lat: event.latlng.lat, lng: event.latlng.lng });
-    },
-  });
-  return <MiniMapComponent />;
-};
-
-// Fungsi membuat titik heatmap
 const generateHeatmapPointsInPolygon = (
   center: [number, number],
   radiusMeters: number,
@@ -104,9 +70,17 @@ const generateHeatmapPointsInPolygon = (
   const points: [number, number, number][] = [];
   const earthRadius = 6371000;
 
-  const polygon = turf.polygon([
-    polygonCoords.map(([lat, lng]) => [lng, lat]), // GeoJSON format
-  ]);
+  const coords = polygonCoords.map(([lat, lng]) => [lng, lat]);
+
+  if (
+    coords.length > 0 &&
+    (coords[0][0] !== coords[coords.length - 1][0] ||
+      coords[0][1] !== coords[coords.length - 1][1])
+  ) {
+    coords.push(coords[0]);
+  }
+
+  const polygon = turf.polygon([coords]);
 
   while (points.length < pointsCount) {
     const angle = Math.random() * 2 * Math.PI;
@@ -131,13 +105,12 @@ const generateHeatmapPointsInPolygon = (
   return points;
 };
 
-
-// Komponen utama halaman peta
 export default function MapPage(prop: Props) {
   const [coords, setCoords] = useState({ lat: -7.5383336, lng: 109.1365494 });
   const [showHeatmap, setShowHeatmap] = useState(false);
   const { total, kepadatan, kelamin, usia } = prop;
   const center: [number, number] = [-7.5383336, 109.1365494];
+
   const {
     totalPopulation,
     menCount,
@@ -145,9 +118,36 @@ export default function MapPage(prop: Props) {
     averageAge,
     populationDensity,
     growthRate,
+    activeProducts,
   } = usePopulationStats();
-  console.log(totalPopulation)
 
+  const [productCountPerArea, setProductCountPerArea] = useState<
+    Map<string, number>
+  >(new Map());
+
+  useEffect(() => {
+    console.log("activeProducts:", activeProducts);
+    const countMap = new Map<string, number>();
+
+    activeProducts.forEach((item: any) => {
+      const rt = normalizeRT_RW(item.rt);
+      const rw = normalizeRT_RW(item.rw);
+
+      const matchedFeature = (rtrw.features as any[]).find((feature) => {
+        const props = feature.properties;
+        return (
+          normalizeRT_RW(props.RT) === rt && normalizeRT_RW(props.RW) === rw
+        );
+      });
+
+      if (matchedFeature) {
+        const key = matchedFeature.properties?.id || `${rt}-${rw}`;
+        countMap.set(key, (countMap.get(key) || 0) + 1);
+      }
+    });
+
+    setProductCountPerArea(countMap);
+  }, [activeProducts]);
 
   const [heatmapPoints, setHeatmapPoints] = useState<
     [number, number, number][]
@@ -165,8 +165,6 @@ export default function MapPage(prop: Props) {
     }
   }, [totalPopulation]);
 
-
-
   return (
     <div className="relative container flex justify-center pb-10 h-screen">
       <div className="w-full h-full z-0">
@@ -181,7 +179,6 @@ export default function MapPage(prop: Props) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {/* Batas polygon manual */}
           <Polygon
             positions={margasanaCoords}
             pathOptions={{
@@ -192,19 +189,42 @@ export default function MapPage(prop: Props) {
             }}
           />
 
-          {/* Marker pusat desa */}
+          <GeoJSON
+            data={rtrw as any}
+            style={() => ({
+              color: "orange",
+              weight: 2,
+              fillOpacity: 0.1,
+            })}
+            onEachFeature={(feature, layer) => {
+              const props = feature.properties as {
+                RT?: any;
+                RW?: any;
+                id?: string;
+              };
+              const key =
+                props.id ||
+                `${normalizeRT_RW(props.RT)}-${normalizeRT_RW(props.RW)}`;
+              console.log(key);
+              const count = productCountPerArea.get(key) ?? 0;
+              console.log(count);
+              layer.bindTooltip(
+                `RT ${props.RT} / RW ${props.RW}\nJumlah Produk Aktif: ${count}`,
+                { sticky: true }
+              );
+            }}
+          />
+
           <Marker position={center} icon={newIcon}>
             <Popup>Margasana</Popup>
           </Marker>
 
-          {/* Heatmap */}
           {showHeatmap && <HeatmapLayer points={heatmapPoints} />}
 
           <LocationTracker setCoords={setCoords} />
         </MapContainer>
       </div>
 
-      {/* Tombol toggle heatmap */}
       <button
         onClick={() => setShowHeatmap((prev) => !prev)}
         className="absolute top-3 left-16 bg-primary text-white px-4 py-2 rounded shadow-md hover:bg-primary/80 transition"
@@ -212,12 +232,10 @@ export default function MapPage(prop: Props) {
         {showHeatmap ? "Sembunyikan Heatmap" : "Tampilkan Heatmap"}
       </button>
 
-      {/* Koordinat kursor */}
       <div className="absolute bottom-11 left-5 bg-primary text-accent border border-accent p-2 rounded-full shadow-md text-sm">
         Koordinat: {coords.lat.toFixed(6)}, {coords.lng.toFixed(6)}
       </div>
 
-      {/* PopUp Data Demografi */}
       <div className="absolute bottom-11 right-5 bg-primary text-white/80 border border-accent p-2 rounded-lg shadow-md text-sm">
         <PopUp
           total={total}
@@ -229,3 +247,36 @@ export default function MapPage(prop: Props) {
     </div>
   );
 }
+
+const MiniMapComponent = () => {
+  const map = useMap();
+  return (
+    <div className="absolute top-4 right-4 w-32 h-32 border-2 border-primary shadow-md rounded-md overflow-hidden z-[1000]">
+      <MapContainer
+        center={map.getCenter()}
+        zoom={map.getZoom() - 7}
+        scrollWheelZoom={true}
+        className="w-full h-full"
+        dragging={true}
+        zoomControl={false}
+        attributionControl={false}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <Marker position={map.getCenter()} icon={newIcon} />
+      </MapContainer>
+    </div>
+  );
+};
+
+const LocationTracker = ({
+  setCoords,
+}: {
+  setCoords: (coords: { lat: number; lng: number }) => void;
+}) => {
+  useMapEvents({
+    mousemove: (event) => {
+      setCoords({ lat: event.latlng.lat, lng: event.latlng.lng });
+    },
+  });
+  return <MiniMapComponent />;
+};
