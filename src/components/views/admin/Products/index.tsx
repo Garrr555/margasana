@@ -170,12 +170,8 @@ export default function ProductsAdminView(props: PropsType) {
                   {/* <td className="text-center">
                     {product.date?.toLocaleString()}
                   </td> */}
-                  <td className="text-center">
-                    {product?.rt}
-                  </td>
-                  <td className="text-center">
-                    {product?.rw}
-                  </td>
+                  <td className="text-center">{product?.rt}</td>
+                  <td className="text-center">{product?.rw}</td>
                   <td className="text-center">
                     {product.religion && product.religion.trim() !== ""
                       ? product.religion
