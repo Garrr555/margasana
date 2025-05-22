@@ -17,6 +17,8 @@ export default function ModalUpdateUser(props: any) {
     const form: any = event.target as HTMLFormElement;
     const data = {
       role: form.role.value,
+      fullname: form.fullname.value,
+      phone: form.phone.value,
     };
 
     const result = await userServices.updateUsers(updatedUser.id, data, session.data?.accessToken);
@@ -55,7 +57,6 @@ export default function ModalUpdateUser(props: any) {
               name="fullname"
               type="text"
               placeholder={updatedUser.fullname}
-              disable={true}
             />
           </div>
           <div className="my-4">
@@ -64,7 +65,6 @@ export default function ModalUpdateUser(props: any) {
               name="phone"
               type="number"
               placeholder={updatedUser.phone}
-              disable={true}
             />
           </div>
 
