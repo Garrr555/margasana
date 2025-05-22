@@ -27,15 +27,26 @@ export default function RegisterView() {
       password: form.password.value,
     };
 
-    const result = await authServices.registerAccount(data);
+    try {
+      const result = await authServices.registerAccount(data);
+      console.log(result);
 
-    if (result.status === 200) {
-      form.reset();
+      if (result.status === 200) {
+        form.reset();
+        push("/auth/login");
+      } else {
+        setError("Email is Already registered");
+      }
+    } catch (err: any) {
+      console.error(err);
+      // Jika backend mengirim pesan error di body
+      if (err.response?.status === 400) {
+        setError("Email is Already registered");
+      } else {
+        setError("Something went wrong");
+      }
+    } finally {
       setIsLoading(false);
-      push("/auth/login");
-    } else {
-      setIsLoading(false);
-      setError("Email is Already registered");
     }
   };
 
