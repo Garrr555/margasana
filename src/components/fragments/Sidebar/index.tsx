@@ -21,9 +21,9 @@ export default function Sidebar(props: PropsType){
     const {pathname} = useRouter()
 
     return (
-      <div className="w-64 h-screen bg-gray-900 border-r border-gray-800 text-white/80 p-6 flex flex-col justify-between fixed top-0 left-0">
+      <div className="w-64 h-screen bg-layout border-r border-primary text-third p-6 flex flex-col justify-between fixed top-0 left-0">
         <div>
-          <div className="text-2xl mb-8">
+          <div className="text-2xl font-bold mb-8">
             <Link href="/">
               {label} Marga<span className="text-accent">.</span>
             </Link>

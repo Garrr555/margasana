@@ -227,7 +227,7 @@ export default function MapPage(prop: Props) {
 
       <button
         onClick={() => setShowHeatmap((prev) => !prev)}
-        className="absolute top-3 left-16 bg-primary text-white px-4 py-2 rounded shadow-md hover:bg-primary/80 transition"
+        className="absolute top-3 left-16 bg-primary text-third px-4 py-2 rounded shadow-md hover:bg-primary/80 transition"
       >
         {showHeatmap ? "Sembunyikan Heatmap" : "Tampilkan Heatmap"}
       </button>
@@ -236,7 +236,7 @@ export default function MapPage(prop: Props) {
         Koordinat: {coords.lat.toFixed(6)}, {coords.lng.toFixed(6)}
       </div>
 
-      <div className="absolute bottom-11 right-5 bg-primary text-white/80 border border-accent p-2 rounded-lg shadow-md text-sm">
+      <div className="absolute bottom-11 right-5 bg-primary text-third border border-accent p-2 rounded-lg shadow-md text-sm">
         <PopUp
           total={total}
           kepadatan={kepadatan}

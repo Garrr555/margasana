@@ -38,7 +38,7 @@ export default function DashboardView() {
         </motion.div>
 
         {/* Overlay gradasi atas & bawah */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-primary"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary"></div>
 
         {/* Teks & Logo */}
         <motion.div
@@ -57,7 +57,7 @@ export default function DashboardView() {
             Website Demografi Desa <br />
             <span className="text-accent font-extrabold">Margasana</span>
           </h1>
-          <p className="text-lg text-white/80 max-w-2xl">
+          <p className="text-lg font-bold text-third max-w-2xl">
             Website ini menyajikan informasi seputar demografi Desa Margasana,
             termasuk jumlah penduduk, kepadatan, pertumbuhan, serta peta
             interaktif.
@@ -71,7 +71,7 @@ export default function DashboardView() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl font-bold text-white mb-6"
+          className="text-3xl font-bold text-third mb-6"
         >
           Statistik Demografi
         </motion.h2>
@@ -93,7 +93,7 @@ export default function DashboardView() {
               whileHover={{ scale: 1.05 }}
               className="w-96 p-6 bg-secondary shadow-lg rounded-xl transition-transform"
             >
-              <h3 className="text-xl font-semibold text-white/80">
+              <h3 className="text-xl font-semibold text-third">
                 {item.title}
               </h3>
               <p className="text-2xl font-bold text-accent">{item.value}</p>
@@ -108,7 +108,7 @@ export default function DashboardView() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl font-bold text-white mb-6"
+          className="text-3xl font-bold text-third mb-6"
         >
           Peta Interaktif
         </motion.h2>
@@ -116,7 +116,7 @@ export default function DashboardView() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-lg text-white/80 mb-6"
+          className="text-lg text-third mb-6"
         >
           Gunakan peta interaktif untuk mengeksplorasi informasi demografi Desa
           Margasana.

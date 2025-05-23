@@ -23,13 +23,16 @@ const config: Config = {
       },
 
       colors: {
-        primary: "#1c1c22",
-        secondary: "#27272c",
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        third: "var(--color-third)",
+        layout: "var(--color-layout)",
         accent: {
-          DEFAULT: "#00ff99",
-          hover: "#00e187",
+          DEFAULT: "var(--color-accent)",
+          hover: "var(--color-accent-hover)",
         },
       },
+
       boxShadow: {
         custom: "0 0 3px rgba(0, 0, 0, 0.5)",
       },

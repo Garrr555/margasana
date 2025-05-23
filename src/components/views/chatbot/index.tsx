@@ -69,8 +69,8 @@ export default function ChatbotView() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-primary text-white/80">
-      <header className=" bg-primary border-b-2 border-zinc-800 py-4 px-6 ">
+    <div className="min-h-screen flex flex-col bg-primary text-third">
+      <header className=" bg-primary border-b-2 border-third py-4 px-6 ">
         <h1 className="text-2xl font-semibold">
           MARG<span className="text-accent">AI</span> Chat
         </h1>
@@ -88,7 +88,7 @@ export default function ChatbotView() {
                 }`}
               >
                 {!isUser && (
-                  <div className="shrink-0 w-9 h-9 rounded-full bg-zinc-800 flex items-center justify-center">
+                  <div className="shrink-0 w-9 h-9 rounded-full bg-secondary flex items-center justify-center">
                     <FaRobot />
                   </div>
                 )}
@@ -97,7 +97,7 @@ export default function ChatbotView() {
                   className={`whitespace-pre-wrap px-4 py-3 rounded-2xl max-w-[75%] text-sm ${
                     isUser
                       ? "bg-accent text-primary rounded-br-none"
-                      : "bg-zinc-800 rounded-bl-none"
+                      : "bg-secondary rounded-bl-none"
                   }`}
                 >
                   {isUser ? (
@@ -110,7 +110,7 @@ export default function ChatbotView() {
                 </div>
 
                 {isUser && (
-                  <div className="shrink-0 w-9 h-9 rounded-full bg-zinc-800 flex items-center justify-center">
+                  <div className="shrink-0 w-9 h-9 rounded-full bg-secondary flex items-center justify-center">
                     <FaRegUser />
                   </div>
                 )}
@@ -130,7 +130,7 @@ export default function ChatbotView() {
 
         <form
           onSubmit={handleSubmit}
-          className="border-t border-zinc-800 bg-primary pt-4 mt-4 sticky bottom-0 "
+          className="border-t border-third bg-primary pt-4 mt-4 sticky bottom-0 "
         >
           <div className="flex gap-2 mb-3">
             <input
@@ -138,7 +138,7 @@ export default function ChatbotView() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask me anything..."
-              className="flex-1 rounded-full bg-zinc-800 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+              className="flex-1 rounded-full bg-secondary px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
             />
             <button
               type="submit"

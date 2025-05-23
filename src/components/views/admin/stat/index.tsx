@@ -51,7 +51,7 @@ export default function StatAdminView() {
               key={index}
               className="w-full p-6 bg-secondary shadow-lg rounded-xl transition-transform"
             >
-              <h3 className="text-xl font-semibold text-white/80">
+              <h3 className="text-xl font-semibold text-third">
                 {item.title}
               </h3>
               <p className="text-2xl font-bold text-accent">{item.value}</p>

@@ -20,7 +20,7 @@ export default function AdminLayout(props: PropsType) {
   return (
     <div className="flex">
       <button
-        className={`${button ? "-translate-x-52 bg-gray-900 -mt-3 p-3 -ml-6 border border-accent rounded-lg" : ""} fixed z-20 top-7 left-56 text-2xl text-accent transition-all duration-500 ease-in-out`}
+        className={`${button ? "-translate-x-52 bg-layout -mt-3 p-3 -ml-6 border border-accent rounded-lg" : ""} fixed z-20 top-7 left-56 text-2xl text-accent transition-all duration-500 ease-in-out`}
         onClick={handleButton}
       >
         {button ? <IoArrowForward /> : <IoArrowBack />}

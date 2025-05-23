@@ -12,7 +12,7 @@ export default function InputFile(props: Propstypes) {
       <div className="">
         <label
           htmlFor={name}
-          className="mt-3 mb-5 bg-primary text-white/80 flex flex-col items-center justify-center text-center gap-5 p-5 cursor-pointer rounded-xl border border-accent"
+          className="mt-3 mb-5 bg-primary text-third flex flex-col items-center justify-center text-center gap-5 p-5 cursor-pointer rounded-xl border border-accent"
         >
           {uploadedImage?.name ? (
             <p>{uploadedImage.name}</p>

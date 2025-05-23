@@ -59,7 +59,7 @@ export default function RegisterView() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-white/80">Fullname</label>
+            <label className="block text-third">Fullname</label>
             <input
               name="fullname"
               id="fullname"
@@ -69,7 +69,7 @@ export default function RegisterView() {
             />
           </div>
           <div>
-            <label className="block text-white/80">Email</label>
+            <label className="block text-third">Email</label>
             <input
               name="email"
               id="email"
@@ -79,7 +79,7 @@ export default function RegisterView() {
             />
           </div>
           <div>
-            <label className="block text-white/80">Phone</label>
+            <label className="block text-third">Phone</label>
             <input
               name="phone"
               id="phone"
@@ -90,7 +90,7 @@ export default function RegisterView() {
           </div>
 
           <div>
-            <label className="block text-white/80">Password</label>
+            <label className="block text-third">Password</label>
             <div className="relative">
               <input
                 name="password"
@@ -101,7 +101,7 @@ export default function RegisterView() {
               />
               <button
                 type="button"
-                className="absolute inset-y-0 right-4 flex items-center text-white/60"
+                className="absolute inset-y-0 right-4 flex items-center text-third"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
@@ -124,7 +124,7 @@ export default function RegisterView() {
             )}
           </button>
         </form>
-        <p className="mt-4 text-center text-white/80">
+        <p className="mt-4 text-center text-third">
           Already have an account?{" "}
           <Link href="/auth/login" className="text-accent">
             Login here

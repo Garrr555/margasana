@@ -8,9 +8,9 @@ export default function Header() {
   const {data} = useSession()
   return (
     <header className="py-5 xl:py-9 sticky top-0 h-fit z-50 bg-primary">
-      <div className="container flex justify-between dark:text-white ">
+      <div className="container flex justify-between text-third ">
         <Link href={"/"}>
-          <h1 className="text-4xl font-semibold dark:text-white">
+          <h1 className="text-4xl font-semibold text-third">
             Marga<span className="text-accent">.</span>
           </h1>
         </Link>

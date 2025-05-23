@@ -190,7 +190,7 @@ export default function ProfileMemberView({
             <form onSubmit={handleChangeProfilePicture} className="w-full">
               <label
                 htmlFor="upload-image"
-                className="mt-5 bg-primary text-white/80 flex flex-col items-center justify-center text-center gap-5 p-5 cursor-pointer rounded-xl border border-accent"
+                className="mt-5 bg-primary text-third flex flex-col items-center justify-center text-center gap-5 p-5 cursor-pointer rounded-xl border border-accent"
               >
                 {changeImage.name ? (
                   <p>{changeImage.name}</p>

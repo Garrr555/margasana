@@ -66,77 +66,77 @@ export default function ProductsAdminView(props: PropsType) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <table className="w-full border-2 border-gray-900">
+          <table className="w-full border-2 border-layout">
             <thead>
-              <tr className="bg-gray-900 ">
+              <tr className="bg-layout ">
                 <th
-                  className="p-2 font-semibold border-r-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   No
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Image
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Name
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Gender
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Status
                 </th>
                 {/* <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Income
                 </th> */}
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Age
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Rt
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Rw
                 </th>
                 <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Religion
                 </th>
                 {/* <th
-                  className="p-2 font-semibold border-x-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   NIK
                 </th> */}
                 <th
-                  className="p-2 font-semibold border-l-2 border border-gray-800"
+                  className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
                   Action
@@ -147,7 +147,7 @@ export default function ProductsAdminView(props: PropsType) {
               {filteredProducts.map((product, index) => (
                 <tr
                   key={index}
-                  className={index % 2 === 0 ? "bg-gray-800" : "bg-primary"}
+                  className={index % 2 === 0 ? "bg-layout" : "bg-primary"}
                 >
                   <td className="text-center">{index + 1}</td>
                   <td className="py-5">

@@ -86,22 +86,22 @@ export default function DetailProductView(props: PropTypes) {
           <div className="flex flex-col gap-4">
             <h1 className="text-4xl font-extrabold">{product?.name}</h1>
             <br />
-            <h3 className="text-xl font-extralight text-white/80">
+            <h3 className="text-xl font-extralight text-third">
               Gender: {product?.category}
             </h3>
-            <h3 className="text-xl font-extralight text-white/80">
+            <h3 className="text-xl font-extralight text-third">
               Age: {product?.age}
             </h3>
-            <h3 className="text-xl font-extralight text-white/80">
+            <h3 className="text-xl font-extralight text-third">
               Date: {product?.date}
             </h3>
-            <h3 className="text-xl font-extralight text-white/80">
+            <h3 className="text-xl font-extralight text-third">
               Religion: {product?.religion}
             </h3>
-            <h3 className="text-xl font-extralight text-white/80">
+            <h3 className="text-xl font-extralight text-third">
               Income: {convertIDR(product?.price)}
             </h3>
-            <h3 className="text-xl font-extralight text-white/80">
+            <h3 className="text-xl font-extralight text-third">
               Rt: {product?.rt} Rw: {product?.rw}
             </h3>
             <br />

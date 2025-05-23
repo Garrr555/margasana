@@ -19,3 +19,21 @@ body {
   background-color: #1c1c22;
   color: white;
 }
+
+:root {
+  --color-primary: #e0e0e5;
+  --color-secondary: #ffffff;
+  --color-third: #000000cc;
+  --color-layout: #f3f4f6;
+  --color-accent: #00c07a;
+  --color-accent-hover: #00ff99;
+}
+
+.dark {
+  --color-primary: #1c1c22;
+  --color-secondary: #27272c;
+  --color-third: #ffffffcc;
+  --color-layout: #111827  ;
+  --color-accent: #00ff99;
+  --color-accent-hover: #00c07a;
+}

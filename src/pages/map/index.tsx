@@ -16,7 +16,7 @@ export default function Map() {
           <div>
             <h2 className="text-accent mb-3 uppercase">Margasana</h2>
             <h1>Village</h1>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-third">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
               placeat praesentium dignissimos ipsa maxime et facere porro vel
               quisquam voluptatem.

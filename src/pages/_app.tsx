@@ -10,6 +10,7 @@ import Toaster from "@/components/ui/Toaster";
 import { JetBrains_Mono } from "next/font/google";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
+import ModeButton from "@/components/ui/mode";
 config.autoAddCss = false;
 
 declare global {
@@ -18,7 +19,14 @@ declare global {
   }
 }
 
-const disableNavbar = ["auth", "admin", "member", "cart", "checkout", "products/"];
+const disableNavbar = [
+  "auth",
+  "admin",
+  "member",
+  "cart",
+  "checkout",
+  "products/",
+];
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -31,16 +39,10 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   const { pathname } = useRouter();
-  const [toaster, setToaster] = useState<any>({
-    
-  });
+  const [toaster, setToaster] = useState<any>({});
 
   useEffect(() => {
-    document.documentElement.classList.add("dark"); // Paksa dark mode
-  }, []);
-
-  useEffect(() => {
-    if(Object.keys(toaster).length > 0) {
+    if (Object.keys(toaster).length > 0) {
       setTimeout(() => {
         setToaster({});
       }, 5000);
@@ -49,12 +51,14 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
-      <div className={`${jetbrainsMono.variable} antialiased dark:bg-primary font-primary dark:text-white`}>
+      <div
+        className={`${jetbrainsMono.variable} antialiased bg-primary font-primary`}
+      >
         {!disableNavbar.includes(pathname.split("/")[1]) && <Header />}
-        <Component {...pageProps} setToaster={setToaster}/>
+        <Component {...pageProps} setToaster={setToaster} />
         {Object.keys(toaster).length > 0 && (
-          <Toaster variant={toaster.variant} message={toaster.message}/>
-        )} 
+            <Toaster variant={toaster.variant} message={toaster.message} />
+          )}
       </div>
     </SessionProvider>
   );

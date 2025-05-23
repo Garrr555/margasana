@@ -35,22 +35,24 @@ export default function UserAdminView(props: PropsType) {
           <h1 className="text-accent text-3xl font-semibold mb-2">
             User Management
           </h1>
-          <table className="w-full border-2 border-gray-900">
+          <table className="w-full border-2 border-layout">
             <thead>
-              <tr className="bg-gray-900">
-                <th className="p-2 font-semibold">No</th>
-                <th className="p-2 text-start font-semibold">Fullname</th>
-                <th className="p-2 text-start font-semibold">Email</th>
-                <th className="p-2 text-start font-semibold">Phone</th>
-                <th className="p-2 font-semibold">Role</th>
-                <th className="p-2 font-semibold">Action</th>
+              <tr className="bg-layout">
+                <th className="p-2 font-semibold border-b border-primary">No</th>
+                <th className="p-2 text-start font-semibold border-b border-primary">
+                  Fullname
+                </th>
+                <th className="p-2 text-start font-semibold border-b border-primary">Email</th>
+                <th className="p-2 text-start font-semibold border-b border-primary">Phone</th>
+                <th className="p-2 font-semibold border-b border-primary">Role</th>
+                <th className="p-2 font-semibold border-b border-primary">Action</th>
               </tr>
             </thead>
             <tbody>
-              {usersData.map((user:User, index) => (
+              {usersData.map((user: User, index) => (
                 <tr
                   key={index}
-                  className={index % 2 === 0 ? "bg-gray-800" : "bg-primary"}
+                  className={index % 2 === 0 ? "bg-layout" : "bg-primary"}
                 >
                   <td className="text-center">{index + 1}</td>
                   <td className="py-5">{user.fullname}</td>
@@ -68,7 +70,7 @@ export default function UserAdminView(props: PropsType) {
                     </Button>
                     <Button
                       type="button"
-                      textcolor="text-white/80 text-xl"
+                      textcolor="text-third text-xl"
                       bgcolor="bg-red-500"
                       onClick={() => setDeleteUser(user)}
                     >

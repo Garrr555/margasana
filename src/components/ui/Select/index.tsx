@@ -27,7 +27,7 @@ export default function Select(props: Propstype) {
         id={name}
         defaultValue={defaultValue}
         disabled={disable}
-        className="py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-white/80 bg-primary rounded-xl"
+        className="py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-third bg-primary rounded-xl"
       >
         {options.map((option: Option) => (
           <option key={option.label} value={option.value} selected={option.selected}>

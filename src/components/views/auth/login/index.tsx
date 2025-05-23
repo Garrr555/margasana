@@ -52,7 +52,7 @@ export default function LoginView() {
         {error && <p className="text-red-500 text-center">{error}</p>}
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <div className="relative">
-            <label className="block text-white/80">Email</label>
+            <label className="block text-third">Email</label>
             {/* <div className="absolute left-3 top-9 text-white/60 text-xl">
               <MdEmail />
             </div> */}
@@ -66,7 +66,7 @@ export default function LoginView() {
           </div>
 
           <div className="relative">
-            <label className="block text-white/80">Password</label>
+            <label className="block text-third">Password</label>
             {/* <div className="absolute left-3 top-9 text-white/60 text-xl">
               <RiLockPasswordFill />
             </div> */}
@@ -82,7 +82,7 @@ export default function LoginView() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-9 text-white/60"
+              className="absolute right-3 top-9 text-third"
             >
               {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
             </button>
@@ -111,7 +111,7 @@ export default function LoginView() {
           onClick={() => signIn("google", { callbackUrl, redirect: false })}
         />
 
-        <p className="mt-4 text-center text-white/80">
+        <p className="mt-4 text-center text-third">
           Dont have an account?{" "}
           <Link href="/auth/register" className="text-accent">
             Register here

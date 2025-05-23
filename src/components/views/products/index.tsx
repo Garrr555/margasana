@@ -83,8 +83,8 @@ export default function ProductView(props: PropsTypes) {
           type="text"
           placeholder="Search"
           name="search"
-          className="border border-white/80 rounded-xl bg-secondary"
-          placeholderreal="Search..."
+          className="border border-third rounded-xl bg-secondary"
+          placeholderreal="Search Name or NIK"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

@@ -73,7 +73,7 @@ export default function Input(props: Propstype) {
         type={type}
         className={`${
           disable && "text-gray-600"
-        } py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-white/80 bg-primary rounded-xl`}
+        } py-2 px-3 focus:outline-none focus:ring-2 focus:ring-accent text-third bg-primary rounded-xl`}
         value={inputValue}
         onChange={handleChange}
       />

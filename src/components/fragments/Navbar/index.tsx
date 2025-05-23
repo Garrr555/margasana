@@ -5,6 +5,7 @@ import LoginOutView from "../../layouts/loginout";
 import Link from "next/link";
 import links from "@/data/links";
 import { useSession } from "next-auth/react";
+import ModeButton from "@/components/ui/mode";
 
 interface CustomUser {
   name?: string | null;
@@ -46,23 +47,25 @@ export default function NavbarView() {
     );
   } 
   return (
-    <nav className="flex gap-8">
-      {links
-        .map((link, i) => {
-          const IconComponent = link.logo;
-          return (
-            <Link
-              href={link.path}
-              key={i}
-              className={`${
-                link.path === pathname && "text-accent border-b-2 border-accent"
-              } capitalize font-medium transition-all hover:text-accent flex gap-2`}
-            >
-              <IconComponent className="text-2xl" />
-              {link.name}
-            </Link>
-          );
-        })}
+    <nav className="flex gap-6 items-center">
+      {links.map((link, i) => {
+        const IconComponent = link.logo;
+        return (
+          <Link
+            href={link.path}
+            key={i}
+            className={`${
+              link.path === pathname && "text-accent border-b-2 border-accent"
+            } capitalize font-medium transition-all hover:text-accent flex gap-2`}
+          >
+            <IconComponent className="text-2xl" />
+            {link.name}
+          </Link>
+        );
+      })}
+      <div>
+        <ModeButton />
+      </div>
     </nav>
   );
 }
