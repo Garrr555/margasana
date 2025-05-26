@@ -30,7 +30,7 @@ export default function DashboardView() {
         >
           <Image
             alt="desa"
-            src={"/desa/demo.jpg"}
+            src={"/desa/demo2.png"}
             layout="fill"
             objectFit="cover"
             className="w-full h-full"
@@ -53,7 +53,7 @@ export default function DashboardView() {
             width={120}
             height={120}
           />
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight text-third">
             Website Demografi Desa <br />
             <span className="text-accent font-extrabold">Margasana</span>
           </h1>
