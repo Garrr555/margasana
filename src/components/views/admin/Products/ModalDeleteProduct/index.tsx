@@ -44,8 +44,9 @@ export default function ModalDeleteProduct(props: PropTypes) {
             setProductsData(data.data);
             setToaster({
               variant: "success",
-              message: "Success to delete product",
+              message: `Success to delete ${deletedProduct.name}`,
             });
+            console.log(deletedProduct.name)
           }
         }
       );
@@ -53,7 +54,7 @@ export default function ModalDeleteProduct(props: PropTypes) {
       setIsLoading(false);
       setToaster({
         variant: "error",
-        message: "Failed to delete product",
+        message: `Failed to delete ${deletedProduct.name}`,
       });
     }
   };

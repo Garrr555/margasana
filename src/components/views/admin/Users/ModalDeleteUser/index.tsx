@@ -3,9 +3,16 @@ import Modal from "@/components/ui/modal";
 import userServices from "@/services/user";
 import { useSession } from "next-auth/react";
 
-export default function ModalDeleteUser(props:any){
+type PropsType = {
+  setToaster: React.Dispatch<React.SetStateAction<{}>>;
+  deletedUser: any;
+  setDeletedUser: React.Dispatch<React.SetStateAction<any>>;
+  setUsersData: React.Dispatch<React.SetStateAction<any>>
+};
 
-    const {deletedUser, setDeletedUser, setUsersData} = props
+export default function ModalDeleteUser(props:PropsType) {
+
+    const {deletedUser, setDeletedUser, setUsersData, setToaster} = props
     const session:any = useSession()
     console.log(session)
 
@@ -14,6 +21,7 @@ export default function ModalDeleteUser(props:any){
          setDeletedUser({});
          const { data } = await userServices.getAllUsers();
          setUsersData(data.data);
+         setToaster({ variant: "success", message: "Success to delete user" });
     }
 
     return (

@@ -59,20 +59,20 @@ export default function ModalAddProduct(props: PropsType) {
               setProductsData(data.data);
               setToaster({
                 variant: "success",
-                message: "Success to add product",
+                message: "Success to add person",
               });
             } else {
               setIsLoading(false);
               setToaster({
                 variant: "error",
-                message: "Failed to add product",
+                message: "Failed to add person",
               });
             }
           } else {
             setIsLoading(false);
             setToaster({
               variant: "error",
-              message: "Failed to add product",
+              message: "Failed to add person",
             });
           }
         }

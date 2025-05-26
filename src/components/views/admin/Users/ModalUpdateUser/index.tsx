@@ -6,8 +6,15 @@ import userServices from "@/services/user";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 
-export default function ModalUpdateUser(props: any) {
-  const { updatedUser, setUpdatedUser, setUsersData } = props;
+type PropsType = {
+  setToaster: React.Dispatch<React.SetStateAction<{}>>;
+  updatedUser: any;
+  setUpdatedUser: React.Dispatch<React.SetStateAction<any>>;
+  setUsersData: React.Dispatch<React.SetStateAction<any>>;
+};
+
+export default function ModalUpdateUser(props: PropsType) {
+  const { updatedUser, setUpdatedUser, setUsersData, setToaster } = props;
   const session: any = useSession();
   const [loading, setLoading] = useState(false)
 
@@ -30,10 +37,12 @@ export default function ModalUpdateUser(props: any) {
       setUpdatedUser({})
       const { data } = await userServices.getAllUsers();
       setUsersData(data.data)
+      setToaster({ variant: "success", message: "Success to update user" });
     } 
     
     else {
       setLoading(false);
+      setToaster({ variant: "error", message: "Failed to update user" });
     }
   };
 

@@ -71,13 +71,13 @@ export default function ModalUpdateProduct(props: PropsType) {
       setProductsData(data.data);
       setToaster({
         variant: "success",
-        message: "Success to update product",
+        message: "Success to update person",
       });
     } else {
       setIsLoading(false);
       setToaster({
         variant: "error",
-        message: "Failed to add product",
+        message: "Failed to add person",
       });
     }
   };
@@ -102,7 +102,7 @@ export default function ModalUpdateProduct(props: PropsType) {
             setIsLoading(false);
             setToaster({
               variant: "error",
-              message: "Failed to update product",
+              message: "Failed to update person",
             });
           }
         }

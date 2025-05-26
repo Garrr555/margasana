@@ -24,7 +24,7 @@ export default function NavbarView() {
 
   if (!session || session.user?.role === "member") {
     return (
-      <nav className="flex gap-8">
+      <nav className="flex gap-8 items-center">
         {links
           .filter((link) => link.role === "member")
           .map((link, i) => {
@@ -43,6 +43,9 @@ export default function NavbarView() {
               </Link>
             );
           })}
+        <div>
+          <ModeButton />
+        </div>
       </nav>
     );
   } 

@@ -13,7 +13,7 @@ type PropsTypes = {
 const toasterVariant = {
   success: {
     title: "Success",
-    icon: <AiOutlineCheckCircle className="text-white text-3xl" />,
+    icon: <AiOutlineCheckCircle className="text-third text-3xl" />,
     bg: "bg-secondary",
     border: "border-secondary",
     progress: "bg-accent",
@@ -63,7 +63,7 @@ export default function Toaster({
 
   return (
     <div
-      className={`fixed right-5 bottom-5 z-[9999] flex flex-col gap-2 w-72 rounded-lg shadow-lg text-white border-l-4 transform transition-all duration-500
+      className={`fixed right-5 bottom-5 z-[9999] flex flex-col gap-2 w-72 rounded-lg shadow-lg text-third border-l-4 transform transition-all duration-500
         ${bg} ${border}
         ${show ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}
       `}

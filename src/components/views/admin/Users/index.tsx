@@ -8,6 +8,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 type PropsType = {
   users: any;
+  setToaster: React.Dispatch<React.SetStateAction<{}>>;
 };
 
 interface User {
@@ -21,7 +22,7 @@ export default function UserAdminView(props: PropsType) {
   const [usersData, setUsersData] = useState([]);
   const [updateUser, setUpdateUser] = useState<any>({});
   const [deleteUser, setDeleteUser] = useState<any>({});
-  const { users } = props;
+  const { users, setToaster } = props;
   console.log(users);
 
   useEffect(() => {
@@ -38,14 +39,24 @@ export default function UserAdminView(props: PropsType) {
           <table className="w-full border-2 border-layout">
             <thead>
               <tr className="bg-layout">
-                <th className="p-2 font-semibold border-b border-primary">No</th>
+                <th className="p-2 font-semibold border-b border-primary">
+                  No
+                </th>
                 <th className="p-2 text-start font-semibold border-b border-primary">
                   Fullname
                 </th>
-                <th className="p-2 text-start font-semibold border-b border-primary">Email</th>
-                <th className="p-2 text-start font-semibold border-b border-primary">Phone</th>
-                <th className="p-2 font-semibold border-b border-primary">Role</th>
-                <th className="p-2 font-semibold border-b border-primary">Action</th>
+                <th className="p-2 text-start font-semibold border-b border-primary">
+                  Email
+                </th>
+                <th className="p-2 text-start font-semibold border-b border-primary">
+                  Phone
+                </th>
+                <th className="p-2 font-semibold border-b border-primary">
+                  Role
+                </th>
+                <th className="p-2 font-semibold border-b border-primary">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -89,6 +100,7 @@ export default function UserAdminView(props: PropsType) {
           updatedUser={updateUser}
           setUpdatedUser={setUpdateUser}
           setUsersData={setUsersData}
+          setToaster={setToaster}
         />
       )}
       {Object.keys(deleteUser).length > 0 && (
@@ -96,6 +108,7 @@ export default function UserAdminView(props: PropsType) {
           deletedUser={deleteUser}
           setDeletedUser={setDeleteUser}
           setUsersData={setUsersData}
+          setToaster={setToaster}
         />
       )}
     </>
