@@ -22,7 +22,7 @@ export default async function handler(
   try {
     const { messages } = req.body;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Tambahkan prompt sistem di awal
     const systemPrompt = {

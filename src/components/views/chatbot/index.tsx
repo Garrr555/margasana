@@ -39,7 +39,9 @@ export default function ChatbotView() {
       const response = await fetch("/api/chatbot/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        body: JSON.stringify({
+          messages: [...messages.slice(-3), userMessage], // kirim 3 terakhir
+        }),
       });
 
       const text = await response.text();
