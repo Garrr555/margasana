@@ -69,9 +69,7 @@ const generateHeatmapPointsInPolygon = (
 ): [number, number, number][] => {
   const points: [number, number, number][] = [];
   const earthRadius = 6371000;
-
   const coords = polygonCoords.map(([lat, lng]) => [lng, lat]);
-
   if (
     coords.length > 0 &&
     (coords[0][0] !== coords[coords.length - 1][0] ||
@@ -79,29 +77,23 @@ const generateHeatmapPointsInPolygon = (
   ) {
     coords.push(coords[0]);
   }
-
   const polygon = turf.polygon([coords]);
 
   while (points.length < pointsCount) {
     const angle = Math.random() * 2 * Math.PI;
     const distance = Math.random() * radiusMeters;
-
     const dx = distance * Math.cos(angle);
     const dy = distance * Math.sin(angle);
-
     const deltaLat = dy / earthRadius;
     const deltaLng = dx / (earthRadius * Math.cos((center[0] * Math.PI) / 180));
-
     const lat = center[0] + deltaLat * (180 / Math.PI);
     const lng = center[1] + deltaLng * (180 / Math.PI);
-
     const pt = turf.point([lng, lat]);
     if (turf.booleanPointInPolygon(pt, polygon)) {
       const intensity = 0.6 + Math.random() * 0.4;
       points.push([lat, lng, intensity]);
     }
   }
-
   return points;
 };
 
@@ -111,34 +103,31 @@ export default function MapPage(prop: Props) {
   const { total, kepadatan, kelamin, usia } = prop;
   const center: [number, number] = [-7.5383336, 109.1365494];
 
-  const {
-    totalPopulation,
-    menCount,
-    womenCount,
-    averageAge,
-    populationDensity,
-    growthRate,
-    activeProducts,
-    loading,
-  } = usePopulationStats();
+  const { totalPopulation, activeProducts, loading } = usePopulationStats();
 
-  const [productCountPerArea, setProductCountPerArea] = useState<
+  const [genderCountPerArea, setGenderCountPerArea] = useState<
+    Map<string, { men: number; women: number }>
+  >(new Map());
+
+  const [averageAgePerArea, setAverageAgePerArea] = useState<
     Map<string, number>
   >(new Map());
 
-  useEffect(() => {
-    console.log("activeProducts:", activeProducts);
+  console.log(activeProducts);
 
+  useEffect(() => {
     if (loading) return;
     if (!activeProducts || activeProducts.length === 0) return;
 
     const countMap = new Map<string, number>();
+    const genderMap = new Map<string, { men: number; women: number }>();
+    const ageMap = new Map<string, number[]>();
 
     activeProducts.forEach((item: any) => {
       const rt = normalizeRT_RW(item.rt);
       const rw = normalizeRT_RW(item.rw);
-
-      console.log("Produk RT:", rt, "RW:", rw); // Cek nilai RT/RW
+      const category = item.category;
+      const age = parseFloat(item.age);
 
       const matchedFeature = (rtrw.features as any[]).find((feature) => {
         const props = feature.properties;
@@ -148,12 +137,31 @@ export default function MapPage(prop: Props) {
       });
 
       if (matchedFeature) {
-        const key = matchedFeature.properties?.id || `${rt}-${rw}`;
+        const key = `${rt}-${rw}`;
         countMap.set(key, (countMap.get(key) || 0) + 1);
+
+        const existing = genderMap.get(key) || { men: 0, women: 0 };
+        if (category === "men") existing.men += 1;
+        else if (category === "women") existing.women += 1;
+        genderMap.set(key, existing);
+
+        if (!isNaN(age)) {
+          const ages = ageMap.get(key) || [];
+          ages.push(age);
+          ageMap.set(key, ages);
+        }
       }
     });
 
-    setProductCountPerArea(countMap);
+    const avgMap = new Map<string, number>();
+    ageMap.forEach((ages, key) => {
+      const avg = ages.reduce((sum, a) => sum + a, 0) / (ages.length || 1);
+      avgMap.set(key, Math.round(avg));
+    });
+
+    // setProductCountPerArea(countMap);
+    setGenderCountPerArea(genderMap);
+    setAverageAgePerArea(avgMap);
   }, [loading, activeProducts]);
 
   const [heatmapPoints, setHeatmapPoints] = useState<
@@ -187,7 +195,7 @@ export default function MapPage(prop: Props) {
       "02/03": "#fabebe",
       "03/03": "#008080",
     };
-    return colorMap[key] || "#999999"; // default color
+    return colorMap[key] || "#999999";
   };
 
   return (
@@ -215,13 +223,13 @@ export default function MapPage(prop: Props) {
           />
 
           <GeoJSON
-            key={Array.from(productCountPerArea.entries())
-              .map(([k, v]) => k + v)
-              .join(",")} // Key unik
+            key={Array.from(genderCountPerArea.entries())
+              .map(([k, v]) => `${k}-${v.men}-${v.women}`)
+              .join(",")}
             data={rtrw as any}
             style={(feature) => {
-              const rt = feature?.properties?.RT;
-              const rw = feature?.properties?.RW;
+              const rt = normalizeRT_RW(feature?.properties?.RT);
+              const rw = normalizeRT_RW(feature?.properties?.RW);
               const color = getColorByRTRW(rt, rw);
               return {
                 color,
@@ -232,32 +240,34 @@ export default function MapPage(prop: Props) {
               };
             }}
             onEachFeature={(feature, layer) => {
-              const props = feature.properties as {
-                RT?: any;
-                RW?: any;
-                id?: string;
+              const rt = normalizeRT_RW(feature?.properties?.RT);
+              const rw = normalizeRT_RW(feature?.properties?.RW);
+              const key = `${rt}-${rw}`;
+              const gender = genderCountPerArea.get(key) || {
+                men: 0,
+                women: 0,
               };
-
-              const rt = normalizeRT_RW(props.RT);
-              const rw = normalizeRT_RW(props.RW);
-              const key = props.id || `${rt}-${rw}`;
-              const count = productCountPerArea.get(key) ?? 0;
+              const avgAge = averageAgePerArea.get(key) ?? 0;
 
               const popupContent = `
-      <strong>RW ${rw} / RT ${rt}</strong><br />
-      Jumlah Penduduk: <strong>${count}</strong>
-    `;
+                <strong>RW ${rw} / RT ${rt}</strong><br />
+                Laki-laki: <strong>${gender.men}</strong> orang<br />
+                Perempuan: <strong>${gender.women}</strong> orang<br />
+                Total: <strong>${gender.men + gender.women}</strong> orang<br />
+                Rata-rata Usia: <strong>${avgAge}</strong> tahun
+              `;
 
               layer.bindPopup(popupContent);
-
-              // Buka popup saat klik di area polygon
               layer.on("click", () => {
                 layer.openPopup();
               });
 
-              layer.bindTooltip(`RT ${rt} / RW ${rw}: ${count} penduduk`, {
-                sticky: true,
-              });
+              layer.bindTooltip(
+                `RT ${rt} / RW ${rw} - Total: ${
+                  gender.men + gender.women
+                }, Rata-rata Usia: ${avgAge} th`,
+                { sticky: true }
+              );
             }}
           />
 
@@ -266,17 +276,16 @@ export default function MapPage(prop: Props) {
           </Marker>
 
           {showHeatmap && <HeatmapLayer points={heatmapPoints} />}
-
           <LocationTracker setCoords={setCoords} />
         </MapContainer>
       </div>
 
-      <button
+      {/* <button
         onClick={() => setShowHeatmap((prev) => !prev)}
         className="absolute top-3 left-16 bg-primary text-third px-4 py-2 rounded shadow-md hover:bg-primary/80 transition"
       >
         {showHeatmap ? "Sembunyikan Heatmap" : "Tampilkan Heatmap"}
-      </button>
+      </button> */}
 
       <div className="absolute bottom-11 left-5 bg-primary text-accent border border-accent p-2 rounded-full shadow-md text-sm">
         Koordinat: {coords.lat.toFixed(6)}, {coords.lng.toFixed(6)}

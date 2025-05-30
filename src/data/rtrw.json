@@ -17,7 +17,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "02", "RW": "01" },
+      "properties": { "RT": "01", "RW": "02" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -31,7 +31,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "03", "RW": "01" },
+      "properties": { "RT": "01", "RW": "03" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -50,7 +50,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "04", "RW": "01" },
+      "properties": { "RT": "02", "RW": "01" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -69,7 +69,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "01", "RW": "02" },
+      "properties": { "RT": "02", "RW": "02" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -84,7 +84,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "02", "RW": "02" },
+      "properties": { "RT": "02", "RW": "03" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -104,7 +104,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "03", "RW": "02" },
+      "properties": { "RT": "03", "RW": "01" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -119,7 +119,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "04", "RW": "02" },
+      "properties": { "RT": "03", "RW": "02" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -135,7 +135,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "01", "RW": "03" },
+      "properties": { "RT": "03", "RW": "03" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -149,7 +149,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "02", "RW": "03" },
+      "properties": { "RT": "04", "RW": "01" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -165,7 +165,7 @@
     },
     {
       "type": "Feature",
-      "properties": { "RT": "03", "RW": "03" },
+      "properties": { "RT": "04", "RW": "02" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
