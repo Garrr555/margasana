@@ -119,6 +119,7 @@ export default function MapPage(prop: Props) {
     populationDensity,
     growthRate,
     activeProducts,
+    loading,
   } = usePopulationStats();
 
   const [productCountPerArea, setProductCountPerArea] = useState<
@@ -127,11 +128,17 @@ export default function MapPage(prop: Props) {
 
   useEffect(() => {
     console.log("activeProducts:", activeProducts);
+
+    if (loading) return;
+    if (!activeProducts || activeProducts.length === 0) return;
+
     const countMap = new Map<string, number>();
 
     activeProducts.forEach((item: any) => {
       const rt = normalizeRT_RW(item.rt);
       const rw = normalizeRT_RW(item.rw);
+
+      console.log("Produk RT:", rt, "RW:", rw); // Cek nilai RT/RW
 
       const matchedFeature = (rtrw.features as any[]).find((feature) => {
         const props = feature.properties;
@@ -147,7 +154,7 @@ export default function MapPage(prop: Props) {
     });
 
     setProductCountPerArea(countMap);
-  }, [activeProducts]);
+  }, [loading, activeProducts]);
 
   const [heatmapPoints, setHeatmapPoints] = useState<
     [number, number, number][]
@@ -164,6 +171,24 @@ export default function MapPage(prop: Props) {
       setHeatmapPoints(points);
     }
   }, [totalPopulation]);
+
+  const getColorByRTRW = (rt: string, rw: string): string => {
+    const key = `${rt}/${rw}`;
+    const colorMap: Record<string, string> = {
+      "01/01": "#e6194b",
+      "02/01": "#3cb44b",
+      "03/01": "#ffe119",
+      "04/01": "#4363d8",
+      "01/02": "#f58231",
+      "02/02": "#911eb4",
+      "03/02": "#46f0f0",
+      "04/02": "#f032e6",
+      "01/03": "#bcf60c",
+      "02/03": "#fabebe",
+      "03/03": "#008080",
+    };
+    return colorMap[key] || "#999999"; // default color
+  };
 
   return (
     <div className="relative container flex justify-center pb-10 h-screen">
@@ -190,28 +215,49 @@ export default function MapPage(prop: Props) {
           />
 
           <GeoJSON
+            key={Array.from(productCountPerArea.entries())
+              .map(([k, v]) => k + v)
+              .join(",")} // Key unik
             data={rtrw as any}
-            style={() => ({
-              color: "orange",
-              weight: 2,
-              fillOpacity: 0.1,
-            })}
+            style={(feature) => {
+              const rt = feature?.properties?.RT;
+              const rw = feature?.properties?.RW;
+              const color = getColorByRTRW(rt, rw);
+              return {
+                color,
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.4,
+                fill: true,
+              };
+            }}
             onEachFeature={(feature, layer) => {
               const props = feature.properties as {
                 RT?: any;
                 RW?: any;
                 id?: string;
               };
-              const key =
-                props.id ||
-                `${normalizeRT_RW(props.RT)}-${normalizeRT_RW(props.RW)}`;
-              console.log(key);
+
+              const rt = normalizeRT_RW(props.RT);
+              const rw = normalizeRT_RW(props.RW);
+              const key = props.id || `${rt}-${rw}`;
               const count = productCountPerArea.get(key) ?? 0;
-              console.log(count);
-              layer.bindTooltip(
-                `RT ${props.RT} / RW ${props.RW}\nJumlah Produk Aktif: ${count}`,
-                { sticky: true }
-              );
+
+              const popupContent = `
+      <strong>RW ${rw} / RT ${rt}</strong><br />
+      Jumlah Penduduk: <strong>${count}</strong>
+    `;
+
+              layer.bindPopup(popupContent);
+
+              // Buka popup saat klik di area polygon
+              layer.on("click", () => {
+                layer.openPopup();
+              });
+
+              layer.bindTooltip(`RT ${rt} / RW ${rw}: ${count} penduduk`, {
+                sticky: true,
+              });
             }}
           />
 

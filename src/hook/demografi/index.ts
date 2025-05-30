@@ -23,6 +23,7 @@ interface PopulationStats {
   populationDensity: number;
   growthRate: number | null;
   activeProducts: Product[];
+  loading: boolean;
 }
 
 export function usePopulationStats(): PopulationStats {
@@ -35,6 +36,7 @@ export function usePopulationStats(): PopulationStats {
     populationDensity: 0,
     growthRate: null,
     activeProducts: [],
+    loading: true,
   });
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export function usePopulationStats(): PopulationStats {
         console.log(activeProducts)
 
         if (!activeProducts || activeProducts.length === 0) {
-          console.warn("Tidak ada data populasi tersedia.");
+          setStats((prev) => ({ ...prev, loading: false }));
           return;
         }
 
@@ -112,9 +114,11 @@ export function usePopulationStats(): PopulationStats {
           populationDensity,
           growthRate,
           activeProducts,
+          loading: false,
         });
       } catch (error) {
         console.error("Error fetching population data:", error);
+        setStats((prev) => ({ ...prev, loading: false }));
       }
     };
 
