@@ -18,6 +18,8 @@ import dynamic from "next/dynamic";
 import { usePopulationStats } from "@/hook/demografi";
 import * as turf from "@turf/turf";
 import rtrw from "@/data/rtrw.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 const HeatmapLayer = dynamic(() => import("@/components/fragments/Heatmap"), {
   ssr: false,
@@ -239,9 +241,11 @@ export default function MapPage(prop: Props) {
                 fill: true,
               };
             }}
-            onEachFeature={(feature, layer) => {
+            onEachFeature={(feature: any, layer) => {
               const rt = normalizeRT_RW(feature?.properties?.RT);
               const rw = normalizeRT_RW(feature?.properties?.RW);
+              const nama = feature?.contact?.name;
+              const phone = feature?.contact?.phone;
               const key = `${rt}-${rw}`;
               const gender = genderCountPerArea.get(key) || {
                 men: 0,
@@ -250,24 +254,40 @@ export default function MapPage(prop: Props) {
               const avgAge = averageAgePerArea.get(key) ?? 0;
 
               const popupContent = `
-                <strong>RW ${rw} / RT ${rt}</strong><br />
-                Laki-laki: <strong>${gender.men}</strong> orang<br />
-                Perempuan: <strong>${gender.women}</strong> orang<br />
-                Total: <strong>${gender.men + gender.women}</strong> orang<br />
-                Rata-rata Usia: <strong>${avgAge}</strong> tahun
+                <h1><strong>RW : ${rw} / RT : ${rt}</strong></h1><br />
+                <table>
+                  <tr><td>Ketua RT</td><td>: ${nama}</td></tr>
+                  <tr><td>Kontak</td><td>: ${phone}</td></tr>
+                </table><br/>
+
+                Laki-laki: <strong>${
+                  gender.men
+                }</strong> - Perempuan: <strong>${gender.women}</strong><br />
+
+                <table>
+                  <tr><td>Total Penduduk</td><td>: <strong>${
+                    gender.men + gender.women
+                  }</strong> jiwa</td></tr>
+                  <tr><td>Rata-rata Usia</td><td>: <strong>${avgAge}</strong> tahun</td></tr>
+                </table>
+
+                <a href="/products" title="Lihat detail RT">
+                  <p>Statistik</p>
+                </a>
               `;
+
+              const content = `
+              <h1><strong>RT ${rt} / RW ${rw}</strong></h1>
+              Total Penduduk: <strong>${
+                gender.men + gender.women
+              } jiwa</strong>`;
 
               layer.bindPopup(popupContent);
               layer.on("click", () => {
                 layer.openPopup();
               });
 
-              layer.bindTooltip(
-                `RT ${rt} / RW ${rw} - Total: ${
-                  gender.men + gender.women
-                }, Rata-rata Usia: ${avgAge} th`,
-                { sticky: true }
-              );
+              layer.bindTooltip(content, { sticky: true });
             }}
           />
 

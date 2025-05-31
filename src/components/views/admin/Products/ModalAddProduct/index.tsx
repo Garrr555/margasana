@@ -25,11 +25,11 @@ export default function ModalAddProduct(props: PropsType) {
   const { setModalAddProduct, setProductsData, setToaster } = props;
   const session: any = useSession();
 
-  const handleStock = (e: any, i: number, type: string) => {
-    const newStockCount: any = [...stockCount];
-    newStockCount[i][type] = e.target.value;
-    setStockCount(newStockCount);
-  };
+  // const handleStock = (e: any, i: number, type: string) => {
+  //   const newStockCount: any = [...stockCount];
+  //   newStockCount[i][type] = e.target.value;
+  //   setStockCount(newStockCount);
+  // };
 
   const uploadImage = (id: string, form: any) => {
     const file = form.image.files[0];
@@ -103,6 +103,7 @@ export default function ModalAddProduct(props: PropsType) {
       image: "",
       rt: form.rt.value,
       rw: form.rw.value,
+      kk: form.kk.value,
     };
 
     console.log(data);
@@ -192,6 +193,14 @@ export default function ModalAddProduct(props: PropsType) {
             name="nik"
             type="number"
             placeholderreal="Insert NIK"
+          />
+        </div>
+        <div className="my-4">
+          <Input
+            label="Nomor KK"
+            name="kk"
+            type="number"
+            placeholderreal="Insert No KK"
           />
         </div>
         {/* <div className="my-4">

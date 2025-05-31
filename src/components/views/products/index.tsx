@@ -56,7 +56,8 @@ export default function ProductView(props: PropsTypes) {
     const matchSearchQuery =
       searchQuery === "" ||
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.nik?.includes(searchQuery.toLowerCase());
+      product.nik?.includes(searchQuery.toLowerCase()) ||
+      product.kk?.includes(searchQuery.toLowerCase());
 
     return (
       matchStatus &&
@@ -84,7 +85,7 @@ export default function ProductView(props: PropsTypes) {
           placeholder="Search"
           name="search"
           className="border border-third rounded-xl bg-secondary"
-          placeholderreal="Search Name or NIK"
+          placeholderreal="Search Name or NIK or KK"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

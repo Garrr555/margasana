@@ -56,6 +56,7 @@ export default function ModalUpdateProduct(props: PropsType) {
       image: newImageURL,
       rt: form.rt.value,
       rw: form.rw.value,
+      kk: form.kk.value,
     };
     const result = await productServices.updateProduct(
       updatedProduct.id,
@@ -193,6 +194,15 @@ export default function ModalUpdateProduct(props: PropsType) {
             type="number"
             placeholderreal="Insert NIK"
             placeholder={updatedProduct.nik}
+          />
+        </div>
+        <div className="my-4">
+          <Input
+            label="Nomor KK"
+            name="kk"
+            type="number"
+            placeholderreal="Insert No KK"
+            placeholder={updatedProduct.kk}
           />
         </div>
         {/* <div className="my-4">

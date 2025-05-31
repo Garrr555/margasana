@@ -11,6 +11,7 @@ export type Product = {
     created_at: Date;
     updated_at: Date;
     nik?: number;
+    kk?: number;
     religion?: string;
     rt?: number;
     rw?: number;

@@ -4,6 +4,7 @@
     {
       "type": "Feature",
       "properties": { "RT": "01", "RW": "01" },
+      "contact": { "name": "Andi Pratama", "phone": "08123410001" },
       "geometry": {
         "type": "LineString",
         "coordinates": [
@@ -17,6 +18,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Siti Aminah", "phone": "08123410002" },
       "properties": { "RT": "01", "RW": "02" },
       "geometry": {
         "type": "LineString",
@@ -31,6 +33,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Budi Hartono", "phone": "08123410003" },
       "properties": { "RT": "01", "RW": "03" },
       "geometry": {
         "type": "LineString",
@@ -50,6 +53,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Dewi Lestari", "phone": "08123410004" },
       "properties": { "RT": "02", "RW": "01" },
       "geometry": {
         "type": "LineString",
@@ -69,6 +73,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Mega Wulandari", "phone": "08123410006" },
       "properties": { "RT": "02", "RW": "02" },
       "geometry": {
         "type": "LineString",
@@ -84,6 +89,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Rendi Saputra", "phone": "08123410007" },
       "properties": { "RT": "02", "RW": "03" },
       "geometry": {
         "type": "LineString",
@@ -104,6 +110,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Linda Yuliana", "phone": "08123410008" },
       "properties": { "RT": "03", "RW": "01" },
       "geometry": {
         "type": "LineString",
@@ -119,6 +126,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Iqbal Maulana", "phone": "08123410009" },
       "properties": { "RT": "03", "RW": "02" },
       "geometry": {
         "type": "LineString",
@@ -135,6 +143,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Putri Anggraini", "phone": "08123410010" },
       "properties": { "RT": "03", "RW": "03" },
       "geometry": {
         "type": "LineString",
@@ -149,6 +158,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Ahmad Fauzi", "phone": "08123410011" },
       "properties": { "RT": "04", "RW": "01" },
       "geometry": {
         "type": "LineString",
@@ -165,6 +175,7 @@
     },
     {
       "type": "Feature",
+      "contact": { "name": "Ari Rachman", "phone": "08123456789" },
       "properties": { "RT": "04", "RW": "02" },
       "geometry": {
         "type": "LineString",
