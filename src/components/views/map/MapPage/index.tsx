@@ -111,6 +111,10 @@ export default function MapPage(prop: Props) {
     Map<string, { men: number; women: number }>
   >(new Map());
 
+  const [statusCountPerArea, setStatusCountPerArea] = useState<
+    Map<string, { leader: number; member: number }>
+  >(new Map());
+
   const [averageAgePerArea, setAverageAgePerArea] = useState<
     Map<string, number>
   >(new Map());
@@ -123,12 +127,14 @@ export default function MapPage(prop: Props) {
 
     const countMap = new Map<string, number>();
     const genderMap = new Map<string, { men: number; women: number }>();
+    const statusMap = new Map<string, { leader: number; member: number }>();
     const ageMap = new Map<string, number[]>();
 
     activeProducts.forEach((item: any) => {
       const rt = normalizeRT_RW(item.rt);
       const rw = normalizeRT_RW(item.rw);
       const category = item.category;
+      const family = item.family;
       const age = parseFloat(item.age);
 
       const matchedFeature = (rtrw.features as any[]).find((feature) => {
@@ -147,6 +153,11 @@ export default function MapPage(prop: Props) {
         else if (category === "women") existing.women += 1;
         genderMap.set(key, existing);
 
+        const existing2 = statusMap.get(key) || { leader: 0, member: 0 };
+        if (family === "leader") existing2.leader += 1;
+        else if (family === "member") existing2.member += 1;
+        statusMap.set(key, existing2);
+
         if (!isNaN(age)) {
           const ages = ageMap.get(key) || [];
           ages.push(age);
@@ -163,6 +174,7 @@ export default function MapPage(prop: Props) {
 
     // setProductCountPerArea(countMap);
     setGenderCountPerArea(genderMap);
+    setStatusCountPerArea(statusMap);
     setAverageAgePerArea(avgMap);
   }, [loading, activeProducts]);
 
@@ -251,10 +263,14 @@ export default function MapPage(prop: Props) {
                 men: 0,
                 women: 0,
               };
+              const status = statusCountPerArea.get(key) || {
+                leader: 0,
+                member: 0,
+              };
               const avgAge = averageAgePerArea.get(key) ?? 0;
 
               const popupContent = `
-                <h1><strong>RW : ${rw} / RT : ${rt}</strong></h1><br />
+                <h1><strong>RT : ${rt} / RW : ${rw}</strong></h1><br />
                 <table>
                   <tr><td>Ketua RT</td><td>: ${nama}</td></tr>
                   <tr><td>Kontak</td><td>: ${phone}</td></tr>
@@ -269,6 +285,9 @@ export default function MapPage(prop: Props) {
                     gender.men + gender.women
                   }</strong> jiwa</td></tr>
                   <tr><td>Rata-rata Usia</td><td>: <strong>${avgAge}</strong> tahun</td></tr>
+                  <tr><td>Jumlah Kepala Keluarga</td><td>: <strong>${
+                    status.leader
+                  }</strong> keluarga</td></tr>
                 </table>
 
                 <a href="/products" title="Lihat detail RT">

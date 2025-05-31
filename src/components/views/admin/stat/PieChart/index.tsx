@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 type Props = {
   nama: string;
-  parameter: "kelamin" | "agama";
+  parameter: "kelamin" | "agama" | "status" | "pendidikan";
 };
 
 interface Product {
@@ -17,6 +17,8 @@ interface Product {
   category: "men" | "women";
   religion: string;
   status: string;
+  martial: string;
+  education: string;
 }
 
 export default function PieChart({ nama, parameter }: Props) {
@@ -34,6 +36,8 @@ export default function PieChart({ nama, parameter }: Props) {
   const activeProducts = products.filter(
     (product) => product.status === "true"
   );
+
+  console.log(activeProducts);
 
   let labels: string[] = [];
   let counts: number[] = [];
@@ -56,6 +60,26 @@ export default function PieChart({ nama, parameter }: Props) {
 
     labels = Object.keys(religionMap);
     counts = Object.values(religionMap);
+  } else if (parameter === "status") {
+    const statusMap: Record<string, number> = {};
+
+    activeProducts.forEach((product) => {
+      const status = product.martial || "Tidak Diketahui";
+      statusMap[status] = (statusMap[status] || 0) + 1;
+    });
+
+    labels = Object.keys(statusMap);
+    counts = Object.values(statusMap);
+  } else if (parameter === "pendidikan") {
+    const educationMap: Record<string, number> = {};
+
+    activeProducts.forEach((product) => {
+      const education = product.education || "Tidak Diketahui";
+      educationMap[education] = (educationMap[education] || 0) + 1;
+    });
+
+    labels = Object.keys(educationMap);
+    counts = Object.values(educationMap);
   }
 
   const data = {

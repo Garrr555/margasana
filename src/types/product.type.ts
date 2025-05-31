@@ -18,6 +18,8 @@ export type Product = {
     job?: string;
     rt?: number;
     rw?: number;
+    education?: string;
+    family?: string;
     stock?: [
         {
             size: string;

@@ -60,6 +60,8 @@ export default function ModalUpdateProduct(props: PropsType) {
       kk: form.kk.value,
       martial: form.martial.value,
       job: form.job.value,
+      education: form.education.value,
+      family: form.family.value,
     };
     const result = await productServices.updateProduct(
       updatedProduct.id,
@@ -129,16 +131,15 @@ export default function ModalUpdateProduct(props: PropsType) {
             placeholder={updatedProduct.name}
           />
         </div>
-        {/* <div className="my-4">
-          <Input
-            label="Income"
-            name="price"
-            type="number"
-            placeholderreal="Insert Income"
-            placeholder={updatedProduct.price}
-          />
-        </div> */}
-
+        <Select
+          label="Family Status"
+          name="family"
+          options={[
+            { label: "Leader", value: "leader" },
+            { label: "Member", value: "member" },
+          ]}
+          defaultValue={updatedProduct.family}
+        />
         <Select
           label="Income"
           name="income"
@@ -225,6 +226,18 @@ export default function ModalUpdateProduct(props: PropsType) {
           defaultValue={updatedProduct.religion}
         />
         <Select
+          label="Last Education"
+          name="education"
+          options={[
+            { label: "Tidak Sekolah", value: "Tidak Sekolah" },
+            { label: "SD/Sederajat", value: "SD/Sederajat" },
+            { label: "SMP/Sederajat", value: "SMP/Sederajat" },
+            { label: "SMA/Sederajat", value: "SMA/Sederajat" },
+            { label: "Diploma/S1/S2/S3", value: "Diploma/S1/S2/S3" },
+          ]}
+          defaultValue={updatedProduct.education}
+        />
+        <Select
           label="Martial Status"
           name="martial"
           options={[
@@ -274,45 +287,33 @@ export default function ModalUpdateProduct(props: PropsType) {
             placeholder={updatedProduct.kk}
           />
         </div>
-        {/* <div className="my-4">
-          <Input
-            label="Rt"
-            name="rt"
-            type="number"
-            placeholderreal="Insert Rt"
-            placeholder={updatedProduct.rt}
-          />
+        <div className="flex gap-4 justify-between w-full items-center">
+          <div className="w-1/2">
+            <Select
+              label="Rt"
+              name="rt"
+              options={[
+                { label: "01", value: 1 },
+                { label: "02", value: 2 },
+                { label: "03", value: 3 },
+                { label: "04", value: 4 },
+              ]}
+              defaultValue={updatedProduct.rt}
+            />
+          </div>
+          <div className="w-1/2">
+            <Select
+              label="Rw"
+              name="rw"
+              options={[
+                { label: "01", value: 1 },
+                { label: "02", value: 2 },
+                { label: "03", value: 3 },
+              ]}
+              defaultValue={updatedProduct.rw}
+            />
+          </div>
         </div>
-        <div className="my-4">
-          <Input
-            label="Rw"
-            name="rw"
-            type="number"
-            placeholderreal="Insert Rw"
-            placeholder={updatedProduct.rw}
-          />
-        </div> */}
-        <Select
-          label="Rt"
-          name="rt"
-          options={[
-            { label: "01", value: 1 },
-            { label: "02", value: 2 },
-            { label: "03", value: 3 },
-            { label: "04", value: 4 },
-          ]}
-          defaultValue={updatedProduct.rt}
-        />
-        <Select
-          label="Rw"
-          name="rw"
-          options={[
-            { label: "01", value: 1 },
-            { label: "02", value: 2 },
-            { label: "03", value: 3 },
-          ]}
-          defaultValue={updatedProduct.rw}
-        />
         <label htmlFor="image">Image</label>
         <div className="flex items-center gap-5 mb-5 w-full">
           <Image
@@ -335,48 +336,6 @@ export default function ModalUpdateProduct(props: PropsType) {
             />
           </div>
         </div>
-        {/* <label htmlFor="stock" className="">
-          Stock
-        </label>
-        {stockCount.map((item: { size: string; qty: number }, i: number) => (
-          <div
-            key={i}
-            className="my-4 flex items-center justify-between gap-3 w-full"
-          >
-            <div className="w-[50%]">
-              <Input
-                name="size"
-                type="text"
-                label="Size"
-                placeholderreal="Insert Product Size"
-                onChange={(e) => {
-                  handleStock(e, i, "size");
-                }}
-                placeholder={item.size}
-              />
-            </div>
-            <div className="w-[50%]">
-              <Input
-                name="qty"
-                type="number"
-                label="QTY"
-                placeholderreal="Insert Product Quantity"
-                onChange={(e) => {
-                  handleStock(e, i, "qty");
-                }}
-                placeholder={item.qty}
-              />
-            </div>
-          </div>
-        ))}
-        <Button
-          bgcolor={"bg-accent rounded-full"}
-          textcolor={"text-primary"}
-          type={"button"}
-          onClick={() => setStockCount([...stockCount, { size: "", qty: 0 }])}
-        >
-          Add New Stock
-        </Button> */}
         <div className="flex flex-col">
           <br />
 

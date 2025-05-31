@@ -23,68 +23,66 @@ export default function StatAdminView() {
     setWaktu(!waktu);
   }
   return (
-
-      <div className="flex flex-col justify-center items-start gap-5">
-        <div className="w-full flex justify-end items-center">
-          <Button
-            type="button"
-            bgcolor="bg-accent rounded-xl"
-            textcolor="text-primary"
-            onClick={toogleWaktu}
-          >{`${waktu ? "Day" : "Year"}`}</Button>
-        </div>
-        <div className="w-full grid grid-cols-2 gap-8 text-center">
-          {[
-            { title: "Total Penduduk", value: `${totalPopulation} Jiwa` },
-            {
-              title: "Kepadatan Penduduk",
-              value: `${populationDensity} Jiwa/km²`,
-            },
-            { title: "Rata-rata Usia", value: `${averageAge} Tahun` },
-            {
-              title: "Pertumbuhan Penduduk",
-              value:
-                growthRate !== null ? `${growthRate}%` : "Data belum tersedia",
-            },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="w-full p-6 bg-secondary shadow-lg rounded-xl transition-transform"
-            >
-              <h3 className="text-xl font-semibold text-third">
-                {item.title}
-              </h3>
-              <p className="text-2xl font-bold text-accent">{item.value}</p>
-            </div>
-          ))}
-        </div>
-        <div className="w-full">
-          <LineChart
-            nama="Pertumbuhan Penduduk"
-            tipe="pertumbuhan"
-            waktu={waktu}
-          />
-        </div>
-        <div className="w-full">
-          <LineChart nama="Usia Penduduk" tipe="usia" waktu={waktu} />
-        </div>
-        <div className="w-full">
-          <BarChart nama="Jumlah Penduduk" tipe="jumlah" waktu={waktu} />
-        </div>
-        <div className="w-full">
-          <BarChart
-            nama="Kepadatan Penduduk (jiwa/km²)"
-            tipe="kepadatan"
-            waktu={waktu}
-          />
-        </div>
-        <div className="w-full flex flex-col xl:flex-row rounded-lg overflow-hidden">
-          <PieChart nama="Jenis Kelamin" parameter="kelamin" />
-          <PieChart nama="Agama" parameter="agama" />
-        </div>
-
-        <div>{/* <Doughnut /> */}</div>
+    <div className="flex flex-col justify-center items-start gap-5">
+      <div className="w-full flex justify-end items-center">
+        <Button
+          type="button"
+          bgcolor="bg-accent rounded-xl"
+          textcolor="text-primary"
+          onClick={toogleWaktu}
+        >{`${waktu ? "Day" : "Year"}`}</Button>
+      </div>
+      <div className="w-full grid grid-cols-2 gap-8 text-center">
+        {[
+          { title: "Total Penduduk", value: `${totalPopulation} Jiwa` },
+          {
+            title: "Kepadatan Penduduk",
+            value: `${populationDensity} Jiwa/km²`,
+          },
+          { title: "Rata-rata Usia", value: `${averageAge} Tahun` },
+          {
+            title: "Pertumbuhan Penduduk",
+            value:
+              growthRate !== null ? `${growthRate}%` : "Data belum tersedia",
+          },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="w-full p-6 bg-secondary shadow-lg rounded-xl transition-transform"
+          >
+            <h3 className="text-xl font-semibold text-third">{item.title}</h3>
+            <p className="text-2xl font-bold text-accent">{item.value}</p>
+          </div>
+        ))}
+      </div>
+      <div className="w-full">
+        <LineChart
+          nama="Pertumbuhan Penduduk"
+          tipe="pertumbuhan"
+          waktu={waktu}
+        />
+      </div>
+      <div className="w-full">
+        <LineChart nama="Usia Penduduk" tipe="usia" waktu={waktu} />
+      </div>
+      <div className="w-full">
+        <BarChart nama="Jumlah Penduduk" tipe="jumlah" waktu={waktu} />
+      </div>
+      <div className="w-full">
+        <BarChart
+          nama="Kepadatan Penduduk (jiwa/km²)"
+          tipe="kepadatan"
+          waktu={waktu}
+        />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full rounded-lg overflow-hidden">
+        <PieChart nama="Jenis Kelamin" parameter="kelamin" />
+        <PieChart nama="Agama" parameter="agama" />
+        <PieChart nama="Status Pernikahan" parameter="status" />
+        <PieChart nama="Pendidikan Terakhir" parameter="pendidikan" />
       </div>
 
+      <div>{/* <Doughnut /> */}</div>
+    </div>
   );
 }
