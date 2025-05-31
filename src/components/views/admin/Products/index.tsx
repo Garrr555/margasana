@@ -115,13 +115,13 @@ export default function ProductsAdminView(props: PropsType) {
                   className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
-                  Rt
+                  Rt/Rw
                 </th>
                 <th
                   className="p-2 font-semibold border-b border-primary"
                   rowSpan={2}
                 >
-                  Rw
+                  Martial
                 </th>
                 <th
                   className="p-2 font-semibold border-b border-primary"
@@ -170,8 +170,14 @@ export default function ProductsAdminView(props: PropsType) {
                   {/* <td className="text-center">
                     {product.date?.toLocaleString()}
                   </td> */}
-                  <td className="text-center">{product?.rt}</td>
-                  <td className="text-center">{product?.rw}</td>
+                  <td className="text-center">
+                    {product?.rt}/{product?.rw}
+                  </td>
+                  <td className="text-center">
+                    {product.martial && product.martial.trim() !== ""
+                      ? product.martial
+                      : "-"}
+                  </td>
                   <td className="text-center">
                     {product.religion && product.religion.trim() !== ""
                       ? product.religion
@@ -181,7 +187,7 @@ export default function ProductsAdminView(props: PropsType) {
                     {product.nik ? product.nik : "None"}
                   </td> */}
                   <td className="text-center">
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex flex-col items-center justify-center gap-2">
                       <Button
                         type="button"
                         textcolor="text-primary text-xl"

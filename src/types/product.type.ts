@@ -2,7 +2,8 @@ export type Product = {
     status: string;
     id: string;
     name: string;
-    price: number;
+    price?: number;
+    income?: string;
     category: string;
     image: string;
     age?: string;
@@ -13,6 +14,8 @@ export type Product = {
     nik?: number;
     kk?: number;
     religion?: string;
+    martial?: string;
+    job?: string;
     rt?: number;
     rw?: number;
     stock?: [

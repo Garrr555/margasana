@@ -93,6 +93,7 @@ export default function ModalAddProduct(props: PropsType) {
     const data = {
       name: form.name.value,
       price: parseInt(form.price.value),
+      income: form.income.value,
       category: form.category.value,
       status: form.status.value,
       stock: stock,
@@ -104,6 +105,8 @@ export default function ModalAddProduct(props: PropsType) {
       rt: form.rt.value,
       rw: form.rw.value,
       kk: form.kk.value,
+      martial: form.martial.value,
+      job: form.job.value,
     };
 
     console.log(data);
@@ -129,15 +132,47 @@ export default function ModalAddProduct(props: PropsType) {
             placeholderreal="Insert Name"
           />
         </div>
-        <div className="my-4">
+        {/* <div className="my-4">
           <Input
             label="Income"
             name="price"
             type="number"
             placeholderreal="Insert Income"
           />
-        </div>
-
+        </div> */}
+        <Select
+          label="Income"
+          name="income"
+          options={[
+            { label: "Rp. 0 - Rp. 500.000", value: "Rp. 0 - Rp. 500.000" },
+            {
+              label: "Rp. 500.001 - Rp. 1.000.000",
+              value: "Rp. 500.001 - Rp. 1.000.000",
+            },
+            {
+              label: "Rp. 1.000.001 - Rp. 2.000.000",
+              value: "Rp. 1.000.001 - Rp. 2.000.000",
+            },
+            {
+              label: "Rp. 2.000.001 - Rp. 3.000.000",
+              value: "Rp. 2.000.001 - Rp. 3.000.000",
+            },
+            {
+              label: "Rp. 3.000.001 - Rp. 5.000.000",
+              value: "Rp. 3.000.001 - Rp. 5.000.000",
+            },
+            {
+              label: "Rp. 5.000.001 - Rp. 10.000.000",
+              value: "Rp. 5.000.001 - Rp. 10.000.000",
+            },
+            {
+              label: "Lebih dari Rp. 10.000.000",
+              value: "Lebih dari Rp. 10.000.000",
+            },
+            { label: "Tidak Berpenghasilan", value: "Tidak Berpenghasilan" },
+          ]}
+          defaultValue={" "}
+        />
         <Select
           label="Category"
           name="category"
@@ -184,6 +219,38 @@ export default function ModalAddProduct(props: PropsType) {
             { label: "konghucu", value: "konghucu" },
             { label: "ateis", value: "ateis" },
             { label: "another", value: "another" },
+          ]}
+          defaultValue={" "}
+        />
+        <Select
+          label="Martial Status"
+          name="martial"
+          options={[
+            { label: "singel", value: "singel" },
+            { label: "married", value: "married" },
+            { label: "divorced", value: "divorced" },
+            { label: "widowed", value: "widowed" },
+          ]}
+          defaultValue={" "}
+        />
+        <Select
+          label="Job"
+          name="job"
+          options={[
+            { label: "Pegawai Negeri Sipil (PNS)", value: "pns" },
+            { label: "Pegawai Swasta", value: "swasta" },
+            { label: "Wiraswasta", value: "wiraswasta" },
+            { label: "Petani", value: "petani" },
+            { label: "Nelayan", value: "nelayan" },
+            { label: "Buruh", value: "buruh" },
+            { label: "Pedagang", value: "pedagang" },
+            { label: "Guru", value: "guru" },
+            { label: "Dokter", value: "dokter" },
+            { label: "Mahasiswa/Pelajar", value: "mahasiswa" },
+            { label: "Ibu Rumah Tangga", value: "irt" },
+            { label: "Tidak Bekerja", value: "tidak_bekerja" },
+            { label: "Pensiunan", value: "pensiunan" },
+            { label: "Lainnya", value: "lainnya" },
           ]}
           defaultValue={" "}
         />

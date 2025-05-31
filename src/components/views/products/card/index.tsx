@@ -23,7 +23,7 @@ export default function Card(props: PropsTypes) {
           <div>
             <p className="font-bold">{product.name}</p>
             <p className="font-light">
-              {product.category} - {product.religion}
+              {product.category}-{product.religion}
             </p>
             <br />
             <hr />

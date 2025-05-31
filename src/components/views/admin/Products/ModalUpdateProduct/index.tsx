@@ -45,7 +45,8 @@ export default function ModalUpdateProduct(props: PropsType) {
     });
     const data = {
       name: form.name.value,
-      price: parseInt(form.price.value),
+      // price: parseInt(form.price.value),
+      income: form.income.value,
       category: form.category.value,
       status: form.status.value,
       age: form.age.value,
@@ -57,6 +58,8 @@ export default function ModalUpdateProduct(props: PropsType) {
       rt: form.rt.value,
       rw: form.rw.value,
       kk: form.kk.value,
+      martial: form.martial.value,
+      job: form.job.value,
     };
     const result = await productServices.updateProduct(
       updatedProduct.id,
@@ -122,19 +125,53 @@ export default function ModalUpdateProduct(props: PropsType) {
             label="Name"
             name="name"
             type="text"
-            placeholderreal="Insert Product Name"
+            placeholderreal="Insert Name"
             placeholder={updatedProduct.name}
           />
         </div>
-        <div className="my-4">
+        {/* <div className="my-4">
           <Input
-            label="Price"
+            label="Income"
             name="price"
             type="number"
-            placeholderreal="Insert Product Price"
+            placeholderreal="Insert Income"
             placeholder={updatedProduct.price}
           />
-        </div>
+        </div> */}
+
+        <Select
+          label="Income"
+          name="income"
+          options={[
+            { label: "Rp. 0 - Rp. 500.000", value: "Rp. 0 - Rp. 500.000" },
+            {
+              label: "Rp. 500.001 - Rp. 1.000.000",
+              value: "Rp. 500.001 - Rp. 1.000.000",
+            },
+            {
+              label: "Rp. 1.000.001 - Rp. 2.000.000",
+              value: "Rp. 1.000.001 - Rp. 2.000.000",
+            },
+            {
+              label: "Rp. 2.000.001 - Rp. 3.000.000",
+              value: "Rp. 2.000.001 - Rp. 3.000.000",
+            },
+            {
+              label: "Rp. 3.000.001 - Rp. 5.000.000",
+              value: "Rp. 3.000.001 - Rp. 5.000.000",
+            },
+            {
+              label: "Rp. 5.000.001 - Rp. 10.000.000",
+              value: "Rp. 5.000.001 - Rp. 10.000.000",
+            },
+            {
+              label: "Lebih dari Rp. 10.000.000",
+              value: "Lebih dari Rp. 10.000.000",
+            },
+            { label: "Tidak Berpenghasilan", value: "Tidak Berpenghasilan" },
+          ]}
+          defaultValue={updatedProduct.income}
+        />
 
         <Select
           label="Category"
@@ -187,6 +224,38 @@ export default function ModalUpdateProduct(props: PropsType) {
           ]}
           defaultValue={updatedProduct.religion}
         />
+        <Select
+          label="Martial Status"
+          name="martial"
+          options={[
+            { label: "singel", value: "singel" },
+            { label: "married", value: "married" },
+            { label: "divorced", value: "divorced" },
+            { label: "widowed", value: "widowed" },
+          ]}
+          defaultValue={updatedProduct.martial}
+        />
+        <Select
+          label="Job"
+          name="job"
+          options={[
+            { label: "Pegawai Negeri Sipil (PNS)", value: "pns" },
+            { label: "Pegawai Swasta", value: "swasta" },
+            { label: "Wiraswasta", value: "wiraswasta" },
+            { label: "Petani", value: "petani" },
+            { label: "Nelayan", value: "nelayan" },
+            { label: "Buruh", value: "buruh" },
+            { label: "Pedagang", value: "pedagang" },
+            { label: "Guru", value: "guru" },
+            { label: "Dokter", value: "dokter" },
+            { label: "Mahasiswa/Pelajar", value: "mahasiswa" },
+            { label: "Ibu Rumah Tangga", value: "irt" },
+            { label: "Tidak Bekerja", value: "tidak_bekerja" },
+            { label: "Pensiunan", value: "pensiunan" },
+            { label: "Lainnya", value: "lainnya" },
+          ]}
+          defaultValue={updatedProduct.job}
+        />
         <div className="my-4">
           <Input
             label="NIK"
@@ -224,26 +293,26 @@ export default function ModalUpdateProduct(props: PropsType) {
           />
         </div> */}
         <Select
-                  label="Rt"
-                  name="rt"
-                  options={[
-                    { label: "01", value: 1 },
-                    { label: "02", value: 2 },
-                    { label: "03", value: 3 },
-                    { label: "04", value: 4 },
-                  ]}
-                  defaultValue={updatedProduct.rt}
-                />
-                <Select
-                  label="Rw"
-                  name="rw"
-                  options={[
-                    { label: "01", value: 1 },
-                    { label: "02", value: 2 },
-                    { label: "03", value: 3 },
-                  ]}
-                  defaultValue={updatedProduct.rw}
-                />
+          label="Rt"
+          name="rt"
+          options={[
+            { label: "01", value: 1 },
+            { label: "02", value: 2 },
+            { label: "03", value: 3 },
+            { label: "04", value: 4 },
+          ]}
+          defaultValue={updatedProduct.rt}
+        />
+        <Select
+          label="Rw"
+          name="rw"
+          options={[
+            { label: "01", value: 1 },
+            { label: "02", value: 2 },
+            { label: "03", value: 3 },
+          ]}
+          defaultValue={updatedProduct.rw}
+        />
         <label htmlFor="image">Image</label>
         <div className="flex items-center gap-5 mb-5 w-full">
           <Image
