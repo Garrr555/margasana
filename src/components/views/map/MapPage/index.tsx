@@ -20,6 +20,7 @@ import * as turf from "@turf/turf";
 import rtrw from "@/data/rtrw.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import PieChart from "../../admin/stat/PieChart";
 
 const HeatmapLayer = dynamic(() => import("@/components/fragments/Heatmap"), {
   ssr: false,
@@ -289,10 +290,10 @@ export default function MapPage(prop: Props) {
                     status.leader
                   }</strong> keluarga</td></tr>
                 </table>
-
                 <a href="/products" title="Lihat detail RT">
-                  <p>Statistik</p>
+                  <p>Statistik Penduduk</p>
                 </a>
+                <a href="/rt-rw/${rt}/${rw}" title="Lihat detail halaman RT/RW">Data Penduduk</a>
               `;
 
               const content = `
