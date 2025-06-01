@@ -26,6 +26,8 @@ const disableNavbar = [
   "cart",
   "checkout",
   "products/",
+  "rtrw-stat",
+  "rt-rw"
 ];
 
 const jetbrainsMono = JetBrains_Mono({

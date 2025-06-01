@@ -290,9 +290,10 @@ export default function MapPage(prop: Props) {
                     status.leader
                   }</strong> keluarga</td></tr>
                 </table>
-                <a href="/products" title="Lihat detail RT">
-                  <p>Statistik Penduduk</p>
-                </a>
+                
+                <hr />
+                <br />
+                <a href="/rtrw-stat/${rt}/${rw}" title="Lihat detail halaman RT/RW">Statistik Penduduk</a> - 
                 <a href="/rt-rw/${rt}/${rw}" title="Lihat detail halaman RT/RW">Data Penduduk</a>
               `;
 

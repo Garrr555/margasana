@@ -31,7 +31,7 @@ export default function DetailRTRWPage() {
   console.log(filteredPopulation);
 
   return (
-    <div className="p-8">
+    <div className="container my-10">
       <h1 className="text-2xl font-bold mb-4">
         Data Penduduk RT:<span className="text-accent"> {rt}</span> - RW:
         <span className="text-accent"> {rw}</span>

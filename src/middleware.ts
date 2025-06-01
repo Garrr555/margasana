@@ -14,4 +14,6 @@ export default withAuth(mainMiddleware, [
   "ai",
   "cart",
   "products",
+  "rt-rw",
+  "rtrw-stat",
 ]);
