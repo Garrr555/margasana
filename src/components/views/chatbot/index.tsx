@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaRegUser, FaRobot } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
+import { usePopulationStats } from "@/hook/demografi";
 
 interface Message {
   role: "user" | "assistant";
@@ -14,6 +15,7 @@ export default function ChatbotView() {
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const stats = usePopulationStats();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -25,7 +27,7 @@ export default function ChatbotView() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || stats.loading) return;
 
     const userMessage: Message = {
       role: "user",
@@ -41,6 +43,14 @@ export default function ChatbotView() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: [...messages.slice(-3), userMessage], // kirim 3 terakhir
+          stats: {
+            totalPopulation: stats.totalPopulation,
+            menCount: stats.menCount,
+            womenCount: stats.womenCount,
+            averageAge: stats.averageAge,
+            populationDensity: stats.populationDensity,
+            growthRate: stats.growthRate,
+          },
         }),
       });
 

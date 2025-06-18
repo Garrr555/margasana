@@ -20,9 +20,18 @@ export default async function handler(
   }
 
   try {
-    const { messages } = req.body;
+    const { messages, stats } = req.body;
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const {
+      totalPopulation = 0,
+      menCount = 0,
+      womenCount = 0,
+      averageAge = 0,
+      populationDensity = 0,
+      growthRate = 0,
+    } = stats || {};
 
     // Tambahkan prompt sistem di awal
     const systemPrompt = {
@@ -32,7 +41,14 @@ export default async function handler(
           text:
             "Kamu adalah asisten desa Margasana dan bernama MARGAI. " +
             "Tugasmu adalah membantu masyarakat dalam hal-hal yang berkaitan dengan demografi penduduk di desa Margasana. " +
-            "Jika ada pertanyaan di luar topik demografi atau desa Margasana, tolak secara sopan dengan mengatakan bahwa kamu hanya dapat membantu seputar data demografi desa Margasana.",
+            "Jika ada pertanyaan di luar topik demografi atau desa Margasana, tolak secara sopan.\n\n" +
+            "📊 Data Demografi Terbaru:\n" +
+            `• Jumlah Penduduk: ${totalPopulation}\n` +
+            `• Laki-laki: ${menCount}\n` +
+            `• Perempuan: ${womenCount}\n` +
+            `• Rata-rata Usia: ${averageAge} tahun\n` +
+            `• Kepadatan Penduduk: ${populationDensity} org/km²\n` +
+            `• Laju Pertumbuhan: ${growthRate}%\n`,
         },
       ],
     };
