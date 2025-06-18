@@ -18,9 +18,6 @@ import dynamic from "next/dynamic";
 import { usePopulationStats } from "@/hook/demografi";
 import * as turf from "@turf/turf";
 import rtrw from "@/data/rtrw.json";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import PieChart from "../../admin/stat/PieChart";
 
 const HeatmapLayer = dynamic(() => import("@/components/fragments/Heatmap"), {
   ssr: false,
