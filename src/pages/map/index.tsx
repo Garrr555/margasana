@@ -17,9 +17,9 @@ export default function Map() {
             <h2 className="text-accent mb-3 uppercase">Margasana</h2>
             <h1>Village</h1>
             <p className="text-lg text-third">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
-              placeat praesentium dignissimos ipsa maxime et facere porro vel
-              quisquam voluptatem.
+              Jelajahi keindahan Desa Margasana melalui peta interaktif yang
+              menampilkan potensi desa, produk unggulan, dan informasi
+              demografis untuk mendukung kemajuan desa yang berkelanjutan.
             </p>
           </div>
           <div className="text-xl flex items-center  justify-end ">
